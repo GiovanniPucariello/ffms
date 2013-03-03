@@ -1,0 +1,4 @@
+.DS_Store
+*.class
+web/WEB-INF/classes
+build
