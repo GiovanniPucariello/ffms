@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BankCardSQL">
+    <typeAlias alias="BankCardHolder" type="com.oyl.ffms.holder.BankCardHolder"/>
+
+    <resultMap id="BankCardResult" class="BankCardHolder">
+        <result property="bcOid" column="BC_OID"/>
+        <result property="cardNo" column="CARD_NO"/>
+        <result property="balance" column="BALANCE"/>
+        <result property="userOid" column="USER_OID"/>
+    </resultMap>
+    
+    <resultMap id="SummaryBankCardResult" class="BankCardHolder">
+        <result property="bcOid" column="BC_OID"/>
+        <result property="cardNo" column="CARD_NO"/>
+        <result property="balance" column="BALANCE"/>
+		<result property="userOid" column="USER_OID"/>
+        <result property="userName" column="USER_NAME"/>
+    </resultMap> 
+    
+    <insert id="insertBankCard" parameterClass="BankCardHolder">
+	        insert into BANK_CARD (
+	             BC_OID
+	            ,CARD_NO
+	            ,BALANCE
+	            ,USER_OID
+	        ) values (
+	             #bcOid:NUMERIC#
+	            ,#cardNo:VARCHAR#
+	            ,#balance:NUMERIC#
+	            ,#userOid:NUMERIC#
+	        )
+    </insert>
+
+    <update id="updateBankCard" parameterClass="BankCardHolder">
+        update BANK_CARD set 
+			CARD_NO     = #cardNo:VARCHAR#,
+			BALANCE     = #balance:NUMERIC#,
+            USER_OID    = #userOid:NUMERIC#
+            where BC_OID = #bcOid:NUMERIC#
+    </update>
+
+    <!-- delete sql -->
+    <delete id="deleteBankCard" parameterClass="BankCardHolder">
+        delete from BANK_CARD 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="cardNo">
+                CARD_NO = #cardNo#
+            </isNotNull>
+            <isNotNull prepend="AND" property="balance">
+                BALANCE = #balance#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getBankCards" parameterClass="BankCardHolder"
+		resultMap="BankCardResult">
+		select * from BANK_CARD
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="cardNo">
+                CARD_NO = #cardNo#
+            </isNotNull>
+            <isNotNull prepend="AND" property="balance">
+                BALANCE = #balance#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+        </dynamic>
+	</select>
+
+</sqlMap>

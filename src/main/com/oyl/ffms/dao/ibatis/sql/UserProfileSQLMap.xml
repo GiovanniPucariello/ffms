@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserProfileSQL">
+    <typeAlias alias="UserProfileHolder" type="com.oyl.ffms.holder.UserProfileHolder"/>
+
+    <resultMap id="UserProfileResult" class="UserProfileHolder">
+        <result property="userOid" column="USER_OID"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="userAlias" column="USER_ALIAS" />
+        <result property="userType" column="USER_TYPE" />
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="gender" column="GENDER"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="loginPasswd" column="LOGIN_PASSWD"/>
+        <result property="ctlStatus" column="CTL_STATUS"/>
+        <result property="failedAttempt" column="FAILED_ATTEMPT"/>
+    </resultMap>
+    
+    <resultMap id="SummaryUserProfileResult" class="UserProfileHolder">
+    	<result property="familyOid" column="FAMILY_OID" />
+    	<result property="familyName" column="FAMILY_NAME" />
+        <result property="userOid" column="USER_OID"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="gender" column="GENDER"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="ctlStatus" column="CTL_STATUS"/>
+    </resultMap>    
+
+    <insert id="insertUserProfile" parameterClass="UserProfileHolder">
+        insert into USER_PROFILE (
+             USER_OID
+            ,USER_NAME
+            ,USER_ALIAS
+            ,USER_TYPE
+            ,PHONE
+            ,EMAIL
+            ,GENDER
+            ,LOGIN_ID
+            ,LOGIN_PASSWD
+            ,CTL_STATUS
+            ,FAILED_ATTEMPT
+        ) values (
+             #userOid:NUMERIC#
+            ,#userName:VARCHAR#
+            ,#userAlias:VARCHAR#
+            ,#userType:VARCHAR#
+            ,#phone:VARCHAR#
+            ,#email:VARCHAR#
+            ,#gender:VARCHAR#
+            ,#loginId:VARCHAR#
+            ,#loginPasswd:VARCHAR#
+            ,#ctlStatus:VARCHAR#
+            ,#failedAttempt:NUMERIC#
+        )
+    </insert>
+
+    <update id="updateUserProfile" parameterClass="UserProfileHolder">
+        update USER_PROFILE set 
+             USER_NAME = #userName:VARCHAR#
+            ,USER_ALIAS = #userAlias:VARCHAR#
+            ,USER_TYPE = #userType:VARCHAR#
+            ,PHONE = #phone:VARCHAR#
+            ,EMAIL = #email:VARCHAR#
+            ,GENDER = #gender:VARCHER#
+            ,LOGIN_ID = #loginId:VARCHAR#
+            ,LOGIN_PASSWD = #loginPasswd:VARCHAR#
+            ,CTL_STATUS = #ctlStatus:VARCHAR#
+            ,FAILED_ATTEMPT = #failedAttempt:NUMERIC#
+            where USER_OID = #userOid:NUMERIC#
+    </update>
+
+    <!-- delete sql -->
+    <delete id="deleteUserProfile" parameterClass="UserProfileHolder">
+        delete from USER_PROFILE 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userName">
+                USER_NAME = #userName#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userAlias">
+                USER_ALIAS = #userAlias#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userType">
+                USER_TYPE = #userType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="email">
+                EMAIL = #email#
+            </isNotNull>
+            <isNotNull prepend="AND" property="gender">
+                GENDER = #gender#
+            </isNotNull>
+            <isNotNull prepend="AND" property="loginId">
+                LOGIN_ID = #loginId#
+            </isNotNull>
+            <isNotNull prepend="AND" property="loginPasswd">
+                LOGIN_PASSWD = #loginPasswd#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ctlStatus">
+                CTL_STATUS = #ctlStatus#
+            </isNotNull>
+            <isNotNull prepend="AND" property="failedAttempt">
+                FAILED_ATTEMPT = #failedAttempt#
+            </isNotNull>
+        </dynamic>
+    </delete>
+
+    <select id="getUserProfiles" parameterClass="UserProfileHolder" resultMap="UserProfileResult">
+        select * from USER_PROFILE 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="userOid">
+               	USER_OID = #userOid#
+           	</isNotNull>
+           	<isNotNull prepend="AND" property="userName">
+           	    USER_NAME = #userName#
+       	 	</isNotNull>
+       	 	<isNotNull prepend="AND" property="userAlias">
+                USER_ALIAS = #userAlias#
+            </isNotNull>
+   	 		<isNotNull prepend="AND" property="userType">
+               	USER_TYPE = #userType#
+           	</isNotNull>
+       	 	<isNotNull prepend="AND" property="phone">
+           	   	PHONE = #phone#
+       		</isNotNull>
+           	<isNotNull prepend="AND" property="email">
+               	EMAIL = #email#
+           	</isNotNull>
+           	<isNotNull prepend="AND" property="gender">
+               	GENDER = #gender#
+           	</isNotNull>
+           	<isNotNull prepend="AND" property="loginId">
+               	LOGIN_ID = #loginId#
+           	</isNotNull>
+           	<isNotNull prepend="AND" property="loginPasswd">
+               	LOGIN_PASSWD = #loginPasswd#
+           	</isNotNull>
+           	<isNotNull prepend="AND" property="ctlStatus">
+               	CTL_STATUS = #ctlStatus#
+           	</isNotNull>
+           	<isNotNull prepend="AND" property="failedAttempt">
+               	FAILED_ATTEMPT = #failedAttempt#
+           	</isNotNull>
+        </dynamic>
+        <isNotNull property="sortField">
+            order by $sortField$
+        </isNotNull>
+    </select>
+
+</sqlMap>

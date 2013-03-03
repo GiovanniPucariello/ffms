@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="report-item" extends="oyl-default" namespace="/"> 
+        
+        <action name="initReportItem" class="com.oyl.ffms.action.ReportItemAction" method="init">
+            <result >/WEB-INF/struts-views/reportItem/reportItemSummary.jsp</result>
+        </action>
+        
+        <action name="printReportItem" class="com.oyl.ffms.action.ReportItemAction" method="printPdf">
+            <result type="stream">
+                <param name="contentType">application/pdf</param>
+                <param name="inputName">resultObject</param>
+                <param name="bufferSize">1024</param>
+                <param name="contentDisposition">inline;filename="result.pdf"</param>
+            </result>
+        </action>
+        
+    </package>
+</struts>

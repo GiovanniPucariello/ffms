@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="CategorySQL">    
+    <select id="getSummaryCategory" parameterClass="CategoryHolder" resultMap="SummaryCategoryResult">
+        select C.CATEGORY_OID, C.CATEGORY_NAME, ifnull(I.ITEMS,0) as ITEMS, ifnull(I.AMOUNT, 0) as AMOUNT
+		from CATEGORY C LEFT JOIN 
+		(select CATEGORY_OID, COUNT(*) as ITEMS, SUM(ITEM_COST * ITEM_QUANTITY) as AMOUNT from ITEM
+		<dynamic prepend="where">
+            <isNotNull prepend="AND" property="itemFromDate">
+                CREATE_DATE <![CDATA[>=]]> #itemFromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemToDate">
+                CREATE_DATE <![CDATA[<=]]> #itemToDate#
+            </isNotNull>
+		</dynamic>
+		 group by CATEGORY_OID) I
+			on C.CATEGORY_OID = I.CATEGORY_OID
+        <dynamic prepend="where">
+            <isNotNull prepend="AND" property="categoryName">
+                CATEGORY_NAME like concat('%',#categoryName#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                FAMILY_OID in (select FAMILY_OID from FAMILY_USER where USER_OID = #userOid#)
+            </isNotNull>
+        </dynamic>
+        <isNotNull property="sortField">
+           	order by $sortField$ $sortOrder$ limit $startRecordNumForMySql$,$perPageSize$ 
+        </isNotNull>
+    </select>
+    
+    <select id="getCountOfCategory" parameterClass="CategoryHolder" resultClass="java.lang.Integer"> 
+        select count(*) as CNT
+        from CATEGORY C LEFT JOIN 
+        (select CATEGORY_OID, COUNT(*) as ITEMS, SUM(ITEM_COST * ITEM_QUANTITY) as AMOUNT from ITEM
+        <dynamic prepend="where">
+            <isNotNull prepend="AND" property="itemFromDate">
+                CREATE_DATE <![CDATA[>=]]> #itemFromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemToDate">
+                CREATE_DATE <![CDATA[<=]]> #itemToDate#
+            </isNotNull>
+        </dynamic>
+         group by CATEGORY_OID) I
+            on C.CATEGORY_OID = I.CATEGORY_OID
+        <dynamic prepend="where">
+            <isNotNull prepend="AND" property="categoryName">
+                CATEGORY_NAME like concat('%',#categoryName#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                FAMILY_OID in (select FAMILY_OID from FAMILY_USER where USER_OID = #userOid#)
+            </isNotNull>
+        </dynamic>
+    </select>
+</sqlMap>

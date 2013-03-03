@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BankCardRecordSQL">
+    <typeAlias alias="BankCardRecordHolder" type="com.oyl.ffms.holder.BankCardRecordHolder"/>
+
+    <resultMap id="BankCardRecordResult" class="BankCardRecordHolder">
+        <result property="bcrOid" column="BCR_OID"/>
+        <result property="bcrType" column="BCR_TYPE"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="description" column="DESCRIPTION"/>
+		<result property="ctlStatus" column="CTL_STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="bcOid" column="BC_OID"/>
+    </resultMap>
+    
+    <resultMap id="SummaryBankCardRecordResult" class="BankCardRecordHolder">
+        <result property="bcrOid" column="BCR_OID"/>
+        <result property="bcrType" column="BCR_TYPE"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="description" column="DESCRIPTION"/>
+		<result property="ctlStatus" column="CTL_STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="bcOid" column="BC_OID"/>
+    </resultMap> 
+    
+    <insert id="insertBankCardRecord" parameterClass="BankCardRecordHolder">
+	        insert into BANK_CARD_RECORD (
+	             BCR_OID
+				,BCR_TYPE
+				,AMOUNT
+				,DESCRIPTION
+				,CTL_STATUS
+				,CREATE_DATE
+				,BC_OID
+	        ) values (
+	             #bcrOid:NUMERIC#
+				,#bcrType:VARCHAR#
+				,#amount:NUMERIC#
+				,#description:VARCHAR#
+				,#ctlStatus:VARCHAR#
+				,#createDate:DATESTAMP#
+				,#bcOid:NUMERIC#
+	        )
+    </insert>
+
+    <update id="updateBankCardRecord" parameterClass="BankCardRecordHolder">
+        update BANK_CARD_RECORD set 
+			BCR_TYPE      = #bcrType:VARCHAR#,
+			AMOUNT        = #amount:NUMERIC#,
+            DESCRIPTION   = #description:VARCHAR#,
+			CTL_STATUS    = #ctlStatus:VARCHAR#,
+			CREATE_DATE   = #createDate:DATESTAMP#,
+			BC_OID        = #bcOid:NUMERIC#
+            where BCR_OID = #bcrOid:NUMERIC#
+    </update>
+
+    <!-- delete sql -->
+    <delete id="deleteBankCardRecord" parameterClass="BankCardRecordHolder">
+        delete from BANK_CARD_RECORD
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="bcrOid">
+                BCR_OID = #bcrOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="bcrType">
+                BCR_TYPE = #bcrType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="amount">
+                AMOUNT = #amount#
+            </isNotNull>
+            <isNotNull prepend="AND" property="description">
+                DESCRIPTION = #description#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+                CTL_STATUS = #ctlStatus#
+            </isNotNull>
+			<isNotNull prepend="AND" property="createDate">
+                CREATE_DATE = #createDate#
+            </isNotNull>
+			<isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getBankCardRecords" parameterClass="BankCardRecordHolder"
+		resultMap="BankCardRecordResult">
+		select * from BANK_CARD_RECORD
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="bcrOid">
+                BCR_OID = #bcrOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="bcrType">
+                BCR_TYPE = #bcrType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="amount">
+                AMOUNT = #amount#
+            </isNotNull>
+            <isNotNull prepend="AND" property="description">
+                DESCRIPTION = #description#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+                CTL_STATUS = #ctlStatus#
+            </isNotNull>
+			<isNotNull prepend="AND" property="createDate">
+                CREATE_DATE = #createDate#
+            </isNotNull>
+			<isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+        </dynamic>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,219 @@
+h3{
+	background-color:red;
+}
+span.pagebanner {
+/*	font-family: Verdana, Arial, Helvetica, sans-serif;*/
+	font-size: 10px;
+	font-weight: bold;
+	color: #456687;
+	background-color: #eee;
+	border: 1px dotted #999;
+	padding: 2px 0px 2px 0px;
+	/*margin-top: 10px;*/
+	border-bottom: none;
+	width: 100%;	
+	display: block;
+	float:left;
+	
+}
+
+span.pagelinks {
+/*	font-family: Verdana, Arial, Helvetica, sans-serif;*/
+	font-size: 10px;
+	font-weight: bold;
+	color: #456687;
+	background-color: #eee;
+	border: 1px dotted #999;
+	padding: 2px 0px 2px 0px;
+	border-top: none;
+	width: 100%;
+	display: block;	
+	float:right;
+	/*margin-bottom: -5px;*/
+}
+
+.tablestyle1{
+	border: 1px solid #666;
+	width: 100%;
+	margin: 20px 0 20px 0;
+	float:left;
+	}
+	
+.tablestyle1 .recordnumber{
+	width:10px;
+}
+
+.tablestyle1 .recordselect{
+	text-align: center;
+	width:10px;
+}
+
+
+.tablestyle1 thead tr th{
+/*	  font-family:  Arial, Helvetica, sans-serif;*/
+	  font-size:  12px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  background-color: #3A02AE;
+	  padding: 2px 4px 2px 4px;
+	  text-align: left;
+	  vertical-align: middle;
+	  clip:  rect(   );
+}
+
+.tablestyle1 tbody tr td {
+	padding: 2px 4px 2px 4px;
+	text-align: left;
+	vertical-align: middle;
+}
+	
+.tablestyle1 th a, .tablestyle1 th a:visited {
+/*	  font-family:  Arial, Helvetica, sans-serif;*/
+	  font-size:  12px;
+	  font-weight:bold;
+	  color: #FFFFFF;
+	  text-decoration: underline;
+}
+
+.tablestyle1 th a:hover {
+/*	  font-family: Arial, Helvetica, sans-serif;*/
+	  font-size:  12px;
+	  font-weight:bold;
+	  color: #CCCCCC;
+      text-decoration: underline;
+}
+
+.tablestyle1 td a:link, .tablestyle1 td a:visited, a:active {
+	color: #0066FF;
+	text-decoration:underline;								
+}	
+
+.tablestyle1 td a:hover {
+	color:#93C600;
+	text-decoration:underline;								
+}	
+
+th.sorted a,th.sortable a{
+	background-position: right;
+	display: block;
+	width: 100%;
+}
+
+th.sortable a{
+	background-image: url(../../images/default/arrow_off.png);
+	background-repeat: no-repeat;
+}
+
+th.order1 a{
+	background-image: url(../../images/default/arrow_down.png);
+	background-repeat: no-repeat;
+}
+
+th.order2 a {
+	background-image: url(../../images/default/arrow_up.png);
+	background-repeat: no-repeat;
+}
+
+tr.odd {
+/*	font-family: Arial, Helvetica, sans-serif;*/
+	font-size: 8pt;
+	color: #000000;
+	background-color: #F5F5F5
+}
+
+tr.tableRowEven,tr.even{
+/*	  font-family: Arial, Helvetica, sans-serif;*/
+	  font-size: 11px;
+	  color: #000000;
+	  background-color: #E2D2FF
+}
+
+.group-1 {
+    font-weight:bold;
+    padding-bottom:10px;
+    border-top:1px solid black;
+}
+.group-2 {
+    font-style:italic;
+    border-top: 1px solid black;
+
+}
+
+.hidden-content{
+	display:none
+}
+
+/*	*******		*/
+
+span.export {
+	padding: 0 4px 1px 20px;
+	display: inline;
+	display: inline-block;
+	cursor: pointer;
+}
+
+span.excel {
+	background-image: url(../../images/default/ico_file_excel.png);
+}
+
+span.csv {
+	background-image: url(../../images/default/ico_file_csv.png);
+}
+
+span.xml {
+	background-image: url(../../images/default/ico_file_xml.png);
+}
+
+span.pdf {
+	background-image: url(../../images/default/ico_file_pdf.png);
+}
+
+span.rtf {
+	background-image: url(../../images/default/ico_file_rtf.png);
+}
+
+.pagebanner
+{
+	float:left;
+	width:180px;
+	text-align:left;
+/*	font-family: Arial, Helvetica, sans-serif;*/
+	font-size:11px;
+	padding-left:15px;
+	color: #666666;
+}
+	
+.pagelinks{
+	float:right;
+	width:180px;
+	text-align:right;
+/*	font-family:Arial, Helvetica, sans-serif;*/
+	font-size:11px;
+	padding-right:15px;
+	color: #666666;
+	}
+
+.pagebanner strong, .pagelinks strong{
+font-weight:bold;
+	}
+	
+
+.pagelinks a{
+color: #333333;
+text-decoration:underline;
+}
+
+.pagelinks a:visted, .pagelinks a:link, .pagelinks a:active{
+color: #333333;
+text-decoration:underline;
+}
+
+.pagelinks a:hover{
+color: #6FC9F9;
+text-decoration:underline;
+}
+
+.pagelinks a img{
+vertical-align:top;
+border:0;
+}

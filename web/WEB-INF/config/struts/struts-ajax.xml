@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+	<package name="ajax" extends="oyl-default" namespace="/ajax">
+		<action name="requestCategoryType" class="com.oyl.ffms.action.AjaxAction" method="requestCategoryType">
+            <result name="success" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">resultObject</param>
+			</result>
+        </action>
+        
+        <action name="checkCategory" class="com.oyl.ffms.action.AjaxAction" method="checkCategory">
+            <result name="success" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">resultObject</param>
+			</result>
+        </action>
+        
+        <action name="checkItem" class="com.oyl.ffms.action.AjaxAction" method="checkItem">
+            <result name="success" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">resultObject</param>
+			</result>
+        </action>
+		
+		<action name="checkBankCardRecord" class="com.oyl.ffms.action.AjaxAction" method="checkBankCardRecord">
+            <result name="success" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">resultObject</param>
+			</result>
+        </action>
+		
+		<action name="requestBankCards" class="com.oyl.ffms.action.AjaxAction" method="requestBankCards">
+            <result name="success" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">resultObject</param>
+			</result>
+        </action>
+		
+		<action name="checkSalaryRecord" class="com.oyl.ffms.action.AjaxAction" method="checkSalaryRecord">
+            <result name="success" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">resultObject</param>
+			</result>
+        </action>
+		
+		<action name="checkCreditCardRecord" class="com.oyl.ffms.action.AjaxAction" method="checkCreditCardRecord">
+            <result name="success" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">resultObject</param>
+			</result>
+        </action>
+        
+	</package>
+</struts> 

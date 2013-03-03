@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="bankCard" extends="oyl-default" namespace="/"> 
+        
+        <action name="initBankCard" class="com.oyl.ffms.action.BankCardAction" method="init">
+        	<result >/WEB-INF/struts-views/bankCard/bankCardSummary.jsp</result>
+        </action>
+        
+        <action name="initAddBankCard" class="com.oyl.ffms.action.BankCardAction" method="initAdd">
+        	<result name="success">/WEB-INF/struts-views/bankCard/createBankCard.jsp</result>
+        </action>
+		
+		<action name="saveAddBankCard" class="com.oyl.ffms.action.BankCardAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/bankCard/createBankCard.jsp</result>
+        </action>
+        
+		<action name="initEditBankCard" class="com.oyl.ffms.action.BankCardAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/bankCard/editBankCard.jsp</result>
+        </action>
+        
+        <action name="saveEditBankCard" class="com.oyl.ffms.action.BankCardAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/bankCard/editBankCard.jsp</result>
+        </action>
+        
+        <action name="deleteBankCard" class="com.oyl.ffms.action.BankCardAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/bankCard/bankCardSummary.jsp</result>
+        </action>
+    </package>
+</struts>

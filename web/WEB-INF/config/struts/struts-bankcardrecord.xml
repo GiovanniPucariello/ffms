@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="bankCardrecord" extends="oyl-default" namespace="/"> 
+        <action name="initBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="init">
+        	<result >/WEB-INF/struts-views/bankCardRecord/bankCardRecordSummary.jsp</result>
+        </action>
+        
+        <action name="initAddBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="initAdd">
+        	<result name="success">/WEB-INF/struts-views/bankCardRecord/createBankCardRecord.jsp</result>
+        </action>
+		
+		<action name="saveAddBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/bankCardRecord/createBankCardRecord.jsp</result>
+        </action>
+        
+		<action name="initEditBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/bankCardRecord/editBankCardRecord.jsp</result>
+        </action>
+        
+        <action name="saveEditBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/bankCardRecord/editBankCardRecord.jsp</result>
+        </action>
+        
+        <action name="deleteBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/bankCardRecord/bankCardRecordSummary.jsp</result>
+        </action>
+		
+		<action name="confirmBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="saveConfirm">
+        	<result name="input">/WEB-INF/struts-views/bankCardRecord/bankCardRecordSummary.jsp</result>
+        </action>
+		
+		<action name="initTransferBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="initTransfer">
+        	<result name="success">/WEB-INF/struts-views/bankCardRecord/transferBankCardRecord.jsp</result>
+        </action>
+		
+		<action name="saveTransferBankCardRecord" class="com.oyl.ffms.action.BankCardRecordAction" method="saveTransfer">
+        	<result name="input">/WEB-INF/struts-views/bankCardRecord/transferBankCardRecord.jsp</result>
+        </action>
+    </package>
+</struts>

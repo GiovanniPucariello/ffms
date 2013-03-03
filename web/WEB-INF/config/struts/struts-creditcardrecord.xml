@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="creditCardrecord" extends="oyl-default" namespace="/"> 
+        <action name="initCreditCardRecord" class="com.oyl.ffms.action.CreditCardRecordAction" method="init">
+        	<result >/WEB-INF/struts-views/creditCardRecord/creditCardRecordSummary.jsp</result>
+        </action>
+        
+        <action name="initAddCreditCardRecord" class="com.oyl.ffms.action.CreditCardRecordAction" method="initAdd">
+        	<result name="success">/WEB-INF/struts-views/creditCardRecord/createCreditCardRecord.jsp</result>
+        </action>
+		
+		<action name="saveAddCreditCardRecord" class="com.oyl.ffms.action.CreditCardRecordAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/creditCardRecord/createCreditCardRecord.jsp</result>
+        </action>
+        
+		<action name="initEditCreditCardRecord" class="com.oyl.ffms.action.CreditCardRecordAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/creditCardRecord/editCreditCardRecord.jsp</result>
+        </action>
+        
+        <action name="saveEditCreditCardRecord" class="com.oyl.ffms.action.CreditCardRecordAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/creditCardRecord/editCreditCardRecord.jsp</result>
+        </action>
+        
+        <action name="deleteCreditCardRecord" class="com.oyl.ffms.action.CreditCardRecordAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/creditCardRecord/creditCardRecordSummary.jsp</result>
+        </action>
+		
+		<action name="confirmCreditCardRecord" class="com.oyl.ffms.action.CreditCardRecordAction" method="saveConfirm">
+        	<result name="input">/WEB-INF/struts-views/creditCardRecord/creditCardRecordSummary.jsp</result>
+        </action>
+		
+    </package>
+</struts>

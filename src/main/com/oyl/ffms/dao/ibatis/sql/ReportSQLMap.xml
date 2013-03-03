@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ReportSQL">
+    <select id="getItemForDetailReport" parameterClass="java.util.Map"
+        resultClass="java.util.HashMap">
+        SELECT   U.USER_ALIAS as userAlias
+                ,I.ITEM_DESC as itemDesc
+                ,C.CATEGORY_NAME as categoryName
+                ,I.CREATE_DATE as date
+                ,CASE WHEN C.CATEGORY_TYPE='N' THEN I.ITEM_COST ELSE NULL END AS itemCost
+                ,CASE WHEN C.CATEGORY_TYPE='N' THEN I.ITEM_QUANTITY ELSE NULL END AS itemQuantity
+                ,I.ITEM_COST*I.ITEM_QUANTITY AS amount
+                FROM ITEM I, CATEGORY C,USER_PROFILE U
+                WHERE   I.CATEGORY_OID = C.CATEGORY_OID 
+                AND     I.USER_OID = U.USER_OID
+                AND     I.CTL_STATUS='C'
+        <dynamic>
+            <isNotNull prepend="AND" property="userOid">
+                I.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN ((SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID = #userOid#)))
+            </isNotNull>
+            <isNotNull prepend="AND" property="fromDate">
+                I.CREATE_DATE <![CDATA[>=]]> #fromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="toDate">
+                I.CREATE_DATE <![CDATA[<=]]> #toDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="selectedUserOid">
+                I.USER_OID = #selectedUserOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryOid">
+                I.CATEGORY_OID = #categoryOid#
+            </isNotNull>
+        </dynamic>
+                ORDER BY date, categoryName
+    </select>
+    
+    <select id="getItemForDailyReport" parameterClass="java.util.Map"
+        resultClass="java.util.HashMap">
+        select   DATE(I.CREATE_DATE) as date
+                ,SUM(I.ITEM_COST*I.ITEM_QUANTITY) AS amount
+                FROM ITEM I, USER_PROFILE U
+                WHERE     I.USER_OID = U.USER_OID
+                AND       I.CTL_STATUS='C'
+        <dynamic>
+            <isNotNull prepend="AND" property="userOid">
+                I.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN ((SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID = #userOid#)))
+            </isNotNull>
+            <isNotNull prepend="AND" property="fromDate">
+                I.CREATE_DATE <![CDATA[>=]]> #fromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="toDate">
+                I.CREATE_DATE <![CDATA[<=]]> #toDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="selectedUserOid">
+                I.USER_OID = #selectedUserOid#
+            </isNotNull>
+        </dynamic>
+                GROUP BY date
+                ORDER BY date
+    </select>
+    
+    <select id="getItemForMonthlyReport" parameterClass="java.util.Map"
+        resultClass="java.util.HashMap">
+        SELECT   DATE_FORMAT(I.CREATE_DATE, '%Y-%m') as date
+                ,C.CATEGORY_NAME as categoryName
+                ,SUM(I.ITEM_COST*I.ITEM_QUANTITY) AS amount
+                FROM ITEM I, CATEGORY C,USER_PROFILE U
+                WHERE   I.CATEGORY_OID = C.CATEGORY_OID 
+                AND     I.USER_OID = U.USER_OID
+                AND     I.CTL_STATUS='C'
+        <dynamic>
+            <isNotNull prepend="AND" property="userOid">
+                I.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN ((SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID = #userOid#)))
+            </isNotNull>
+            <isNotNull prepend="AND" property="fromDate">
+                I.CREATE_DATE <![CDATA[>=]]> #fromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="toDate">
+                I.CREATE_DATE <![CDATA[<=]]> #toDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="selectedUserOid">
+                I.USER_OID = #selectedUserOid#
+            </isNotNull>
+        </dynamic>
+                GROUP BY date, categoryName
+                ORDER BY date, categoryName
+    </select>
+    
+    <select id="getSalaryForDetailReport" parameterClass="java.util.Map"
+        resultClass="java.util.HashMap">
+        SELECT   U.USER_ALIAS AS userAlias
+                ,S.DESCRIPTION AS itemDesc
+                ,S.CREATE_DATE AS date
+                ,S.AMOUNT AS amount
+                ,CASE SR_TYPE WHEN 'S' THEN '工资' WHEN 'I' THEN '奖金' WHEN 'O' THEN '其它' END AS srType
+        FROM SALARY_RECORD S, USER_PROFILE U
+        WHERE S.USER_OID = U.USER_OID
+        AND S.CTL_STATUS='C'
+        <dynamic>
+            <isNotNull prepend="AND" property="userOid">
+                S.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN ((SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID = #userOid#)))
+            </isNotNull>
+            <isNotNull prepend="AND" property="fromDate">
+                S.CREATE_DATE <![CDATA[>=]]> #fromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="toDate">
+                S.CREATE_DATE <![CDATA[<=]]> #toDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="selectedUserOid">
+                S.USER_OID = #selectedUserOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="srType">
+                S.SR_TYPE = #srType#
+            </isNotNull>
+        </dynamic>
+        ORDER BY date
+    </select>
+    
+    <select id="getSalaryForYearlyReport" parameterClass="java.util.Map"
+        resultClass="java.util.HashMap">
+        SELECT   YEAR(S.CREATE_DATE) AS date
+                ,U.USER_ALIAS AS userAlias
+                ,SUM(S.AMOUNT) AS amount
+        FROM SALARY_RECORD S, USER_PROFILE U
+        WHERE S.USER_OID = U.USER_OID
+        AND S.CTL_STATUS='C'
+        <dynamic>
+            <isNotNull prepend="AND" property="userOid">
+                S.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN ((SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID = #userOid#)))
+            </isNotNull>
+            <isNotNull prepend="AND" property="fromDate">
+                S.CREATE_DATE <![CDATA[>=]]> #fromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="toDate">
+                S.CREATE_DATE <![CDATA[<=]]> #toDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="selectedUserOid">
+                S.USER_OID = #selectedUserOid#
+            </isNotNull>
+        </dynamic>
+        GROUP BY date, userAlias
+        ORDER BY date, userAlias
+    </select>
+</sqlMap>

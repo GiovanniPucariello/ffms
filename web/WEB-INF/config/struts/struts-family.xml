@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="family" extends="oyl-default" namespace="/"> 
+        
+        <action name="initFamily" class="com.oyl.ffms.action.FamilyAction" method="init">
+        	<result >/WEB-INF/struts-views/family/familySummary.jsp</result>
+        </action>
+        
+        <action name="initAddFamily" class="com.oyl.ffms.action.FamilyAction" method="initAdd">
+        	<result>/WEB-INF/struts-views/family/createFamily.jsp</result>
+        </action>
+        
+        <action name="saveAddFamily" class="com.oyl.ffms.action.FamilyAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/family/createFamily.jsp</result>
+        </action>
+        
+        <action name="initEditFamily" class="com.oyl.ffms.action.FamilyAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/family/editFamily.jsp</result>
+        </action>
+        
+        <action name="saveEditFamily" class="com.oyl.ffms.action.FamilyAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/family/editFamily.jsp</result>
+        </action>
+        
+        <action name="deleteFamily" class="com.oyl.ffms.action.FamilyAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/family/familySummary.jsp</result>
+        </action>
+        
+    </package>
+</struts>

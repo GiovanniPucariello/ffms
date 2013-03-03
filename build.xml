@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="FFMS" basedir="." default="help">
+
+	<property file="build.properties" />
+
+	<!-- utilize predefined environment variables -->
+	<property name="env" environment="env" value="env" />
+	<property name="JAVA.HOME" value="${env.JAVA_HOME}" />
+
+	<!-- define essential properties -->
+	<property name="project.name" value="Family Financial Management System" />
+	<property name="project.shortname" value="ffms" />
+	<property name="project.version" value="1.0" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="ear.dir" value="${build.dir}/ear" />
+	<property name="war.dir" value="${build.dir}/war" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+	<property name="test.reports.dir" value="${basedir}/build/test-reports" />
+	<property name="src.dir" value="${basedir}/src/main" />
+	<property name="test.src.dir" value="${basedir}/src/test" />
+	<property name="web.dir" value="${basedir}/web" />
+	<property name="compilelib.dir" value="${basedir}/compile_lib" />
+	<property name="classes.dir" value="${web.dir}/WEB-INF/classes" />
+	<property name="lib.dir" value="${web.dir}/WEB-INF/lib" />
+	<property name="config.dir" value="${web.dir}/WEB-INF/config" />
+	<property name="struts.dir" value="${config.dir}/struts" />
+	<property name="spring.dir" value="${config.dir}/spring" />
+	<property name="log4j.dir" value="${config.dir}/log4j" />
+	<property name="resource.dir" value="${config.dir}/resource" />
+	
+	
+
+	<!-- define the classpath required for compilation -->
+	<path id="common.classpath">
+		<pathelement location="${classes.dir}" />
+		<fileset dir="${compilelib.dir}">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+
+	<!-- create a reference for the classpath utilized -->
+	<property name="common.classpath" refid="common.classpath" />
+
+	<!-- list out the available targets to console -->
+	<target name="help" depends="init">
+		<echo message="" />
+		<echo message="${project.name} v${project.version} build file" />
+		<echo message="" />
+		<echo message="Available targets are:" />
+		<echo message="" />
+		<echo message="  compile    --&gt; compiles the source files" />
+		<echo message="  clean      --&gt; cleans up all the binaries" />
+		<echo message="  war        --&gt; builds the war file" />
+		<echo message="  ear        --&gt; builds the ear file" />
+		<echo message="  initDb     --&gt; initializes the database schemas, etc" />
+		<echo message="" />
+	</target>
+
+	<!-- reports the current date and time each time this build file is run -->
+	<target name="init">
+		<tstamp>
+			<format pattern="yyyy-MMMM-dd hh:mm aa" property="now" />
+		</tstamp>
+		<echo message="${now}" />
+	</target>
+
+	<!-- clean up everything -->
+	<target name="clean" depends="init">
+		<delete dir="${build.dir}" />
+		<delete dir="${classes.dir}" />
+	</target>
+
+	<!-- ensure basic directories are in place for the build -->
+	<target name="setup" depends="init">
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${jar.dir}" />
+		<mkdir dir="${war.dir}" />
+		<mkdir dir="${ear.dir}" />
+	</target>
+
+	<!-- compile the java source files -->
+	<target name="compile" depends="setup">
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml" />
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="${struts.dir}">
+				<include name="*.xml" />
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="${spring.dir}">
+				<include name="sql-map-config.xml" />
+		      	<include name="applicationContext*.xml" />
+				<include name="jdbc.properties" />
+				<include name="test_applicationContext.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="${resource.dir}">
+				<include name="*.properties" />
+				<include name="*.vm" />
+				<include name="*.jrxml" />
+				<include name="*.jasper" />
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="${log4j.dir}">
+				<include name="log4j*" />
+			</fileset>
+		</copy>
+	    <copy todir="${classes.dir}">
+	      <fileset dir="${config.dir}/application">
+	        <include name="*.xml" />
+	      </fileset>
+	    </copy>
+
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" executable="${JAVA.HOME}/bin/javac.exe" deprecation="off" debug="on">
+			<classpath>
+				<pathelement path="${common.classpath}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- create the war file for the application -->
+	<target name="preparewar" depends="jar">
+		<delete dir="${classes.dir}/com" />
+		<copy todir="${classes.dir}">
+			<fileset dir="${struts.dir}">
+				<include name="*.xml" />
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="${resource.dir}">
+				<include name="*" />
+				<include name="*.vm" />
+				<include name="*.jrxml" />
+				<include name="*.jasper" />
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="${spring.dir}">
+				<include name="sql-map-config.xml" />
+		      	<include name="applicationContext*.xml" />
+				<include name="jdbc.properties" />
+				<include name="test_applicationContext.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="${log4j.dir}">
+				<include name="log4j*" />
+			</fileset>
+		</copy>
+	    <copy todir="${classes.dir}">
+	      <fileset dir="${config.dir}/application">
+	        <include name="*.xml" />
+	      </fileset>
+	    </copy>
+					
+		<copy todir="${war.dir}">
+			<fileset dir="${web.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${war.dir}/WEB-INF/lib">
+			<fileset dir="${jar.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="jar" depends="compile">
+		<delete>
+			<fileset dir="${classes.dir}" includes="*.xml,*.properties,*.vm" />
+		</delete>
+		<jar jarfile="${jar.dir}/ffms-${project.version}.jar" basedir="${classes.dir}" includes="com/oyl/ffms/**" excludes="com/oyl/base/**">
+			<manifest>
+				<attribute name="Implementation-Version" value="${project.version}" />
+			</manifest>
+		</jar>
+		<jar jarfile="${jar.dir}/j2ee-base.jar" basedir="${classes.dir}" includes="com/oyl/base/**">
+			<manifest>
+				<attribute name="Implementation-Version" value="${project.version}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- create the war file for the application -->
+	<target name="war" depends="preparewar">
+		<jar jarfile="${ear.dir}/${project.shortname}-${project.version}.war">
+			<fileset dir="${war.dir}" includes="**" />
+		</jar>
+	</target>
+	
+	<target name="test" depends="compile">
+		<delete dir="${test.reports.dir}" />
+		<mkdir dir="${test.reports.dir}" />
+
+		<javac srcdir="${test.src.dir}" destdir="${classes.dir}" executable="${JAVA.HOME}/bin/javac.exe" deprecation="off" debug="on">
+			<classpath>
+				<pathelement path="${common.classpath}" />
+			</classpath>
+		</javac>
+
+		<junit haltonfailure="no" showoutput="true">
+			<sysproperty key="basedir" value="${basedir}" />
+			<classpath refid="common.classpath" />
+			<formatter type="brief" usefile="true" />
+			<batchtest fork="yes" todir="${test.reports.dir}">
+				<fileset dir="${test.src.dir}">
+					<!--<include name="**/PoGrnReportServiceImplTest.java" />
+					<include name="com/pracbiz/test/service/**" />-->
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+</project>

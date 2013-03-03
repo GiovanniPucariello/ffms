@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appConfig>
+    <mailSender>
+        <sender1>
+            <smtpHost>smtp.gmail.com</smtpHost>
+            <smtpUser>louyang2@pracbiz.com</smtpUser>
+            <smtpPassword>002210abc</smtpPassword>
+            <smtpProtocol>smtp</smtpProtocol>
+            <smtpPort>465</smtpPort>
+            <needAuth>true</needAuth>
+            <viaSSL>true</viaSSL>
+            <socketFactoryClass>javax.net.ssl.SSLSocketFactory</socketFactoryClass>
+            <socketFactoryFallback>false</socketFactoryFallback>
+            <senderName></senderName>
+            <senderAddr></senderAddr>
+            <replyToAddr></replyToAddr>
+        </sender1>
+    </mailSender>
+    
+</appConfig>

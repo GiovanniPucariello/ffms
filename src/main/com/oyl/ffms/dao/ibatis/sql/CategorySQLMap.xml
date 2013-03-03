@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CategorySQL">
+    <typeAlias alias="CategoryHolder" type="com.oyl.ffms.holder.CategoryHolder"/>
+
+    <resultMap id="CategoryResult" class="CategoryHolder">
+        <result property="categoryOid" column="CATEGORY_OID"/>
+        <result property="categoryType" column="CATEGORY_TYPE"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="familyOid" column="FAMILY_OID"/>
+    </resultMap>
+    
+    <resultMap id="SummaryCategoryResult" class="CategoryHolder">
+        <result property="categoryOid" column="CATEGORY_OID"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="itemNum" column="ITEMS" />
+        <result property="itemAmount" column="AMOUNT" />
+    </resultMap> 
+    
+    <insert id="insertCategory" parameterClass="CategoryHolder">
+	        insert into CATEGORY (
+	             CATEGORY_OID
+	            ,CATEGORY_TYPE
+	            ,CATEGORY_NAME
+	            ,FAMILY_OID
+	        ) values (
+	             #categoryOid:NUMERIC#
+	            ,#categoryType:VARCHAR#
+	            ,#categoryName:VARCHAR#
+	            ,#familyOid:NUMERIC#
+	        )
+    </insert>
+
+    <update id="updateCategory" parameterClass="CategoryHolder">
+        update CATEGORY set 
+            CATEGORY_TYPE = #categoryType:VARCHAR#,
+            CATEGORY_NAME = #categoryName:VARCHAR#,
+            FAMILY_OID    = #familyOid:NUMERIC#
+            where CATEGORY_OID = #categoryOid:NUMERIC#
+    </update>
+
+    <!-- delete sql -->
+    <delete id="deleteCategory" parameterClass="CategoryHolder">
+        delete from CATEGORY 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="categoryOid">
+                CATEGORY_OID = #categoryOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryType">
+                CATEGORY_TYPE = #categoryType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryName">
+                CATEGORY_NAME = #categoryName#
+            </isNotNull>
+            <isNotNull prepend="AND" property="familyOid">
+                FAMILY_OID = #familyOid#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getCategories" parameterClass="CategoryHolder"
+		resultMap="CategoryResult">
+		select * from CATEGORY
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="categoryOid">
+                CATEGORY_OID = #categoryOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryType">
+                CATEGORY_TYPE = #categoryType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryName">
+                CATEGORY_NAME = #categoryName#
+            </isNotNull>
+            <isNotNull prepend="AND" property="familyOid">
+                FAMILY_OID = #familyOid#
+            </isNotNull>
+        </dynamic>
+	</select>
+
+</sqlMap>

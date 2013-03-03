@@ -1,0 +1,78 @@
+#mastheadWrapper{
+	height: 116px;
+	margin-bottom: 20px;
+	padding-top: 20px;
+	background: transparent url(../../images/img3.gif) no-repeat scroll center bottom;
+	color: #9900CC;
+	text-decoration: none;
+}
+
+#mastheadWrapper .logoImg {
+	position:relative;
+	top:45px;
+	left:90px;
+	width:200px;
+	height:64px;
+	text-align:center;
+	float:left;
+	background-color:transparent;
+}
+
+#mastheadWrapper .logoInfo{
+	position:relative;
+	top:20px;
+	left:15%;
+	float:left;
+	position:relative;
+}
+
+#mastheadWrapper .logoInfo h1{
+	font-size:36px;
+}
+
+#mastheadWrapper .logoInfoPopup{
+	position:relative;
+	top:20px;
+	left:30%;
+	float:left;
+}
+
+#mastheadWrapper .logoInfoPopup h1{
+	font-size:36px;
+}
+
+#headerContent {	
+	float:right;
+	position:relative;
+	top:50%;
+	right:0;
+	width:290px;
+	
+}
+
+#headerContent .group{
+	margin-right:20px;
+/*	color: #271CB0;*/
+	display:block;
+	float:left;
+	width:100%;
+}
+
+#headerContent .group .label{
+font-weight:bold;
+display:block;
+width:55px;
+float:left;
+}
+
+#headerContent .group .data{
+display:block;
+float:left;
+/*width:150px;*/
+}
+
+#headerContent .seperator{
+padding:0px 10px 0px 0px;
+display:block;
+float:left;
+}

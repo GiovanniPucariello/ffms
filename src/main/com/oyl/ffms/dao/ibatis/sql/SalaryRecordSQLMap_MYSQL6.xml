@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="SalaryRecordSQL">    
+    <select id="getSummarySalaryRecord" parameterClass="SalaryRecordHolder" resultMap="SummarySalaryRecordResult">
+        SELECT   SR_OID
+				,SR_TYPE
+				,AMOUNT
+				,DESCRIPTION
+				,S.CTL_STATUS
+				,CREATE_DATE
+				,S.USER_OID
+				,U.USER_NAME
+		FROM SALARY_RECORD S, USER_PROFILE U
+		WHERE S.USER_OID = U.USER_OID
+        <dynamic>
+            <isNotNull prepend="AND" property="userOid">
+                U.USER_OID = #userOid#
+            </isNotNull>
+			<isNotNull prepend="AND" property="description">
+                DESCRIPTION like concat('%',#description#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="srType">
+                SR_TYPE = #srType#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+                S.CTL_STATUS = #ctlStatus#
+            </isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+		    <![CDATA[
+			    S.CREATE_DATE >= #fromDate#
+		    ]]>
+		    </isNotNull>
+		    <isNotNull prepend="AND" property="toDate">
+		    <![CDATA[
+			    S.CREATE_DATE <= #toDate#
+		    ]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="curUserOid">
+                S.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN (SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID=#curUserOid#))
+            </isNotNull>
+        </dynamic>
+        <isNotNull property="sortField">
+           	order by $sortField$ $sortOrder$ limit $startRecordNumForMySql$,$perPageSize$ 
+        </isNotNull>
+    </select>
+    
+    <select id="getCountOfSalaryRecord" parameterClass="SalaryRecordHolder" resultClass="java.lang.Integer"> 
+        select count(*) as CNT
+        FROM SALARY_RECORD S, USER_PROFILE U
+		WHERE S.USER_OID = U.USER_OID
+        <dynamic>
+            <isNotNull prepend="AND" property="userOid">
+                U.USER_OID = #userOid#
+            </isNotNull>
+			<isNotNull prepend="AND" property="description">
+                DESCRIPTION like concat('%',#description#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="srType">
+                SR_TYPE = #srType#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+                S.CTL_STATUS = #ctlStatus#
+            </isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+		    <![CDATA[
+			    S.CREATE_DATE >= #fromDate#
+		    ]]>
+		    </isNotNull>
+		    <isNotNull prepend="AND" property="toDate">
+		    <![CDATA[
+			    S.CREATE_DATE <= #toDate#
+		    ]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="curUserOid">
+                S.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN (SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID=#curUserOid#))
+            </isNotNull>
+        </dynamic>
+    </select>
+</sqlMap>

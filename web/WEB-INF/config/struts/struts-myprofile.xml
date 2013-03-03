@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="myprofile" extends="oyl-default" namespace="/">
+        
+        <action name="initEditMyProfile" class="com.oyl.ffms.action.MyProfileAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/login/editMyProfile.jsp</result>
+        </action>
+		
+		<action name="saveEditMyProfile" class="com.oyl.ffms.action.MyProfileAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/login/editMyProfile.jsp</result>
+        </action>
+        
+    </package>
+</struts>

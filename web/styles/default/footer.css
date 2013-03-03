@@ -1,0 +1,17 @@
+/*	for the footer page	*/
+
+#footerWrapper{	
+	vertical-align: middle;
+	min-width:100%;
+	background: #DBD6FC url(../../images/img4.gif) repeat-x 0px -120px;
+	}
+
+.copyright{
+	display:block;
+	padding-top:3px;
+	padding-bottom:3px;
+	width: 100%;
+	text-align: center;
+	color: #4B1F83;
+	font-size:11px;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="salaryRecord" extends="oyl-default" namespace="/"> 
+        <action name="initSalaryRecord" class="com.oyl.ffms.action.SalaryRecordAction" method="init">
+        	<result >/WEB-INF/struts-views/salaryRecord/salaryRecordSummary.jsp</result>
+        </action>
+        
+        <action name="initAddSalaryRecord" class="com.oyl.ffms.action.SalaryRecordAction" method="initAdd">
+        	<result name="success">/WEB-INF/struts-views/salaryRecord/createSalaryRecord.jsp</result>
+        </action>
+		
+		<action name="saveAddSalaryRecord" class="com.oyl.ffms.action.SalaryRecordAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/salaryRecord/createSalaryRecord.jsp</result>
+        </action>
+        
+		<action name="initEditSalaryRecord" class="com.oyl.ffms.action.SalaryRecordAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/salaryRecord/editSalaryRecord.jsp</result>
+        </action>
+        
+        <action name="saveEditSalaryRecord" class="com.oyl.ffms.action.SalaryRecordAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/salaryRecord/editSalaryRecord.jsp</result>
+        </action>
+        
+        <action name="deleteSalaryRecord" class="com.oyl.ffms.action.SalaryRecordAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/salaryRecord/salaryRecordSummary.jsp</result>
+        </action>
+		
+		<action name="confirmSalaryRecord" class="com.oyl.ffms.action.SalaryRecordAction" method="saveConfirm">
+        	<result name="input">/WEB-INF/struts-views/salaryRecord/salaryRecordSummary.jsp</result>
+        </action>
+		
+    </package>
+</struts>

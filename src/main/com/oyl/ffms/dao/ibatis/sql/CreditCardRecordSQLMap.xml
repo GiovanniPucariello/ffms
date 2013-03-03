@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CreditCardRecordSQL">
+    <typeAlias alias="CreditCardRecordHolder" type="com.oyl.ffms.holder.CreditCardRecordHolder"/>
+
+    <resultMap id="CreditCardRecordResult" class="CreditCardRecordHolder">
+        <result property="ccrOid" column="CCR_OID"/>
+        <result property="ccrType" column="CCR_TYPE"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="description" column="DESCRIPTION"/>
+		<result property="ctlStatus" column="CTL_STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="ccOid" column="CC_OID"/>
+		<result property="bcOid" column="BC_OID"/>
+    </resultMap>
+    
+    <resultMap id="SummaryCreditCardRecordResult" class="CreditCardRecordHolder">
+        <result property="ccrOid" column="CCR_OID"/>
+        <result property="ccrType" column="CCR_TYPE"/>
+        <result property="amount" column="AMOUNT"/>
+        <result property="description" column="DESCRIPTION"/>
+		<result property="ctlStatus" column="CTL_STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="ccOid" column="CC_OID"/>
+    </resultMap> 
+    
+    <insert id="insertCreditCardRecord" parameterClass="CreditCardRecordHolder">
+	        insert into CREDIT_CARD_RECORD (
+	             CCR_OID
+				,CCR_TYPE
+				,AMOUNT
+				,DESCRIPTION
+				,CTL_STATUS
+				,CREATE_DATE
+				,CC_OID
+				,BC_OID
+	        ) values (
+	             #ccrOid:NUMERIC#
+				,#ccrType:VARCHAR#
+				,#amount:NUMERIC#
+				,#description:VARCHAR#
+				,#ctlStatus:VARCHAR#
+				,#createDate:DATESTAMP#
+				,#ccOid:NUMERIC#
+				,#bcOid:NUMERIC#
+	        )
+    </insert>
+
+    <update id="updateCreditCardRecord" parameterClass="CreditCardRecordHolder">
+        update CREDIT_CARD_RECORD set 
+			CCR_TYPE      = #ccrType:VARCHAR#,
+			AMOUNT        = #amount:NUMERIC#,
+            DESCRIPTION   = #description:VARCHAR#,
+			CTL_STATUS    = #ctlStatus:VARCHAR#,
+			CREATE_DATE   = #createDate:DATESTAMP#,
+			CC_OID        = #ccOid:NUMERIC#,
+			BC_OID        = #bcOid:NUMERIC#
+            where CCR_OID = #ccrOid:NUMERIC#
+    </update>
+
+    <!-- delete sql -->
+    <delete id="deleteCreditCardRecord" parameterClass="CreditCardRecordHolder">
+        delete from CREDIT_CARD_RECORD
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="ccrOid">
+                CCR_OID = #ccrOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ccrType">
+                CCR_TYPE = #ccrType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="amount">
+                AMOUNT = #amount#
+            </isNotNull>
+            <isNotNull prepend="AND" property="description">
+                DESCRIPTION = #description#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+                CTL_STATUS = #ctlStatus#
+            </isNotNull>
+			<isNotNull prepend="AND" property="createDate">
+                CREATE_DATE = #createDate#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+			<isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getCreditCardRecords" parameterClass="CreditCardRecordHolder"
+		resultMap="CreditCardRecordResult">
+		select * from CREDIT_CARD_RECORD
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="ccrOid">
+                CCR_OID = #ccrOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ccrType">
+                CCR_TYPE = #ccrType#
+            </isNotNull>
+            <isNotNull prepend="AND" property="amount">
+                AMOUNT = #amount#
+            </isNotNull>
+            <isNotNull prepend="AND" property="description">
+                DESCRIPTION = #description#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+                CTL_STATUS = #ctlStatus#
+            </isNotNull>
+			<isNotNull prepend="AND" property="createDate">
+                CREATE_DATE = #createDate#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+			<isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+        </dynamic>
+	</select>
+
+</sqlMap>

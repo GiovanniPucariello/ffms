@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ModuleSQL">
+	<typeAlias alias="ModuleHolder" type="com.oyl.ffms.holder.ModuleHolder" />
+
+	<resultMap id="ModuleResult" class="ModuleHolder">
+		<result property="moduleId" column="MODULE_ID" />
+		<result property="moduleName" column="MODULE_NAME" />
+		<result property="moduleLevel" column="MODULE_LEVEL" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="showAble" column="SHOW_ABLE" />
+		<result property="showOrder" column="SHOW_ORDER" />
+		<result property="moduleLink" column="MODULE_LINK" />
+	</resultMap>
+
+	<select id="getModules" parameterClass="ModuleHolder"
+		resultMap="ModuleResult">
+		select * from MODULE
+		where SHOW_ABLE='Y'
+		<dynamic>
+			<isNotNull prepend="AND" property="moduleId">
+				MODULE_ID = #moduleId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="moduleName">
+				MODULE_NAME = #moduleName#
+			</isNotNull>
+			<isNotNull prepend="AND" property="moduleLevel">
+				MODULE_LEVEL = #moduleLevel#
+			</isNotNull>
+			<isNotNull prepend="AND" property="parentId">
+				PARENT_ID = #parentId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="showAble">
+				SHOW_ABLE = #showAble#
+			</isNotNull>
+			<isNotNull prepend="AND" property="showOrder">
+				SHOW_ORDER = #showOrder#
+			</isNotNull>
+			<isNotNull prepend="AND" property="moduleLink">
+				MODULE_LINK = #moduleLink#
+			</isNotNull>
+		</dynamic>
+		<isNotNull property="sortField">
+			order by $sortField$
+		</isNotNull>
+		<isNull property="sortField">
+			order by SHOW_ORDER
+		</isNull>
+	</select>
+	
+	
+	<select id="getUserModules" parameterClass="java.util.HashMap"
+		resultMap="ModuleResult">
+		select * from MODULE
+		where (MODULE_ID in (select MODULE_ID from ROLE_MODULE where ROLE_OID in (select ROLE_OID from USER_ROLE where USER_OID = #userOid# ))
+		or MODULE_ID in (select distinct PARENT_ID from MODULE where MODULE_ID in (select MODULE_ID from ROLE_MODULE where ROLE_OID in (select ROLE_OID from USER_ROLE where USER_OID = #userOid#))))
+		and SHOW_ABLE='Y'
+		order by SHOW_ORDER
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="ItemSQL">    
+    <select id="getSummaryItem" parameterClass="ItemHolder" resultMap="SummaryItemResult">
+        select 	 I.ITEM_OID
+        		,I.ITEM_DESC
+        		,C.CATEGORY_NAME
+        		,I.ITEM_COST*I.ITEM_QUANTITY AS ITEM_TOTAL_COST
+        		,I.CTL_STATUS
+        		,I.CREATE_DATE
+        		,U.USER_ALIAS
+        		from ITEM I, CATEGORY C,USER_PROFILE U
+        		where I.CATEGORY_OID = C.CATEGORY_OID AND I.USER_OID = U.USER_OID
+        <dynamic>
+            <isNotNull prepend="AND" property="itemDesc">
+                ITEM_DESC like concat('%',#itemDesc#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryName">
+                CATEGORY_NAME like concat('%',#categoryName#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="selectedUserOid">
+            	I.USER_OID = #selectedUserOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                C.FAMILY_OID in (select FAMILY_OID from FAMILY_USER where USER_OID = #userOid#)
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+				I.CTL_STATUS = #ctlStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+		    <![CDATA[
+			    I.CREATE_DATE >= #fromDate#
+		    ]]>
+		    </isNotNull>
+		    <isNotNull prepend="AND" property="toDate">
+		    <![CDATA[
+			    I.CREATE_DATE <= #toDate#
+		    ]]>
+		    </isNotNull>
+        </dynamic>
+        <isNotNull property="sortField">
+           	order by $sortField$ $sortOrder$ limit $startRecordNumForMySql$,$perPageSize$ 
+        </isNotNull>
+    </select>
+    
+    <select id="getCountOfItem" parameterClass="ItemHolder" resultClass="java.lang.Integer"> 
+        select count(*) as CNT
+        		from ITEM I, CATEGORY C, USER_PROFILE U
+        		where I.CATEGORY_OID = C.CATEGORY_OID AND I.USER_OID = U.USER_OID
+        <dynamic>
+            <isNotNull prepend="AND" property="itemDesc">
+                ITEM_DESC like concat('%',#itemDesc#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryName">
+                CATEGORY_NAME like concat('%',#categoryName#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="selectedUserOid">
+            	I.USER_OID = #selectedUserOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                C.FAMILY_OID in (select FAMILY_OID from FAMILY_USER where USER_OID = #userOid#)
+            </isNotNull>
+			<isNotNull prepend="AND" property="ctlStatus">
+				I.CTL_STATUS = #ctlStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+		    <![CDATA[
+			    I.CREATE_DATE >= #fromDate#
+		    ]]>
+		    </isNotNull>
+		    <isNotNull prepend="AND" property="toDate">
+		    <![CDATA[
+			    I.CREATE_DATE <= #toDate#
+		    ]]>
+		    </isNotNull>
+        </dynamic>
+    </select>
+</sqlMap>

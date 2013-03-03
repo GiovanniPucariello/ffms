@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserRoleSQL">
+    <typeAlias alias="UserRoleHolder" type="com.oyl.ffms.holder.UserRoleHolder"/>
+
+    <resultMap id="UserRoleResult" class="UserRoleHolder">
+        <result property="roleOid" column="ROLE_OID"/>
+        <result property="userOid" column="USER_OID"/>
+    </resultMap>
+    
+    <insert id="insertUserRole" parameterClass="UserRoleHolder">
+	        insert into USER_ROLE (
+	             ROLE_OID
+	            ,USER_OID
+	        ) values (
+	             #roleOid:NUMERIC#
+	            ,#userOid:NUMERIC#
+	        )
+    </insert>
+
+    <delete id="deleteUserRole" parameterClass="UserRoleHolder">
+        delete from USER_ROLE 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="roleOid">
+                ROLE_OID = #roleOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getUserRoles" parameterClass="UserRoleHolder"
+		resultMap="UserRoleResult">
+		select * from USER_ROLE
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="roleOid">
+                ROLE_OID = #roleOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+        </dynamic>
+	</select>
+</sqlMap>

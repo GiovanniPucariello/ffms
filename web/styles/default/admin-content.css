@@ -1,0 +1,756 @@
+/************	The Old Style ************/
+
+/*<== the main page of the Top menu	==>*/
+
+/*the biggest character title on then main page
+ when click the Top Menu*/
+
+.main-big-header {
+	  font-family:  Arial Black;
+	  font-size: 20pt;
+	  color: #cccccc;
+	  }
+
+.main-crbar {
+	 background-color: #B00000
+	 }
+
+
+/********** The New Style ************/
+
+
+/********start add by LiYue *********/
+.tableOriginal{
+	border: 1px solid #666666;
+	float:left;
+	width: 99%;
+	margin: 20px 0 20px 0;
+}
+
+.tableUpdated{
+	border: 1px solid #FF0000;
+	float:left;
+	width: 99%;
+	margin: 20px 0 20px 0;
+}
+
+/*a .large { 
+	border: 0px none ; 
+	display: block; 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	top: -1px; 
+	left: -1px; 
+}
+
+a:hover .large { 
+	border: 1px solid black; 
+	display: block; 
+	position: absolute; 
+	top: 0px;
+	left: 40px; 
+	width: auto;
+	height: auto;
+	overflow: auto;
+	background-color: white;
+}*/
+
+.dijitTabPaneWrapper {
+   clear: both;
+}
+			
+.emailTab{
+	padding:10px;
+	background-color: #CCFF99;
+	
+}
+
+.emailTo{
+	background-color: #009999;
+	padding:10px;
+}
+
+.emailCc{
+	background-color: #999933;
+	padding:10px;
+}
+
+.emailContent{
+	background-color: #9999FF;
+	padding:10px;
+}
+/********end add by LiYue *********/
+
+
+/*### Start - For action buttons ###*/
+.buttonWrapper{
+	text-align:right;
+	margin:10px 0px;
+	overflow: hidden;
+}
+
+.actionButton{
+	height:22px;
+	background: #E1D2FF;
+	padding-left:8px; 
+	display:block; /*opera*/
+	display:inline-block; /*ie*/
+	display:-moz-inline-box;  /*ff*/
+	margin-left:5px;
+	zoom: 1; 
+	/*to trigger hasLayout in IE6*/
+	margin-top:5px;
+	margin-bottom:5px;
+	border-collapse:collapse;
+	border-color: #DDDDDD;
+	border-style: ridge;
+	border-width: 1px;
+	margin-right:5px;
+}
+
+.actionButton span{
+	background: #E1D2FF;
+	height:21px;
+	display:block;
+	display:inline-block;
+	padding-right:8px;
+	vertical-align:middle;
+	line-height:21px;
+	color: #9900CC;
+	font-weight:bold;
+}
+
+.actionButton:link, .actionButton:visited, .action:active {
+	text-decoration:none;
+}
+
+.actionButton:hover{
+	/*background-position:bottom left;*/
+	/*background:url(../../images/button-hover-left.jpg) no-repeat top left;*/
+	background: #9900CC;
+	cursor:hand;
+}
+
+.actionButton:hover span{
+	/*background-position:bottom right;
+	color:#FF0000;*/
+	background: #9900CC;
+	/*background:url(../../images/button-hover-left.jpg) no-repeat top right;*/
+	color: #E1D2FF;
+}
+
+/*### End - For action buttons ###*/
+
+/*### Start - For vertical buttons ###*/
+.verticalButton{
+	width:110px;
+}
+
+.verticalButton a{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	float:left;
+}
+/*### End - For vertical buttons ###*/
+
+/*### Start - For page title ###*/
+.pageTitle{
+	width:1145px;
+	height:30px;
+	margin:10px 0px;
+	background-color: #CCB4FE;
+}
+
+.pageTitle .title{
+	font-size: 15px;
+	background: #CCB4FE url(../../images/titleicon.gif) no-repeat 15px 50%;
+	padding-left:35px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+/*### End - For page title ###*/
+
+/*### Start - For search form ###*/
+.search{
+	margin:10px 0px;
+}
+
+.search .inputForm{
+	width:100%;
+}
+
+.search .inputForm td{
+	height:24px;
+}
+
+.search .inputForm .labelCell{
+	width:220px;
+}
+.search .inputForm .data .labelCell{
+	
+}
+.search .inputForm .group{
+	float:left;
+}
+
+.search .searchResultSeperator{
+	margin:13px auto;
+	display:block;
+	padding:5px auto;
+}
+
+hr, .search .searchResultSeperator hr{
+	width:100%;
+	/* set for ff, due to hr in ff is only a box*/
+	border:none;
+	border-top:3px solid #9462FD;
+	/* set for ie*/
+	height:3px;
+}
+
+.tablestyle1 hr{
+	width:100%;
+	/* set for ff, due to hr in ff is only a box*/
+	border:none;
+	border-top:1px solid #615F60!important;
+	/* set for ie*/
+	height:1px;
+}
+
+.search .inputForm .searchCategory, .dataWrapper .subTitle{
+	margin:2px 0 5px 10px;
+	font-size:11pt;
+	color:#000000;
+	font-weight:bold;
+	text-decoration: underline;
+}
+
+
+
+/*### End - For search form ###*/
+
+/*### Used to display the status of a user action ###*/
+.actionResult{
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+}
+	
+.actionResult .msg{
+	font-size: 13px;
+	font-weight: bold;
+}
+	
+.noResult .msg{
+	color:#FF0000;
+	font-size: 13px;
+	font-weight:bold;
+}
+
+.validationError .msg{
+	color:#FF0000;
+	font-weight:bold;
+}
+
+/*### Start - For summary of a record ###*/
+.recordSummary{
+	float:left;
+  width:100%;
+	background-color:#F0DF90;
+	position:relative;
+	/*margin-bottom:10px;*/
+}
+
+.recordSummaryWrapper{
+	float:left;
+	position:relative;
+	left:50%;
+}
+
+.recordSummaryWrapper .group{	
+   	position:relative;
+   	left:-50%;
+}
+
+.recordSummaryWrapper .group .label{
+	width: 80px;
+	zoom: 1;
+	display:block; /*opera*/
+	display:inline-block; /*ie*/
+	display:-moz-inline-box;  /*ff*/
+}
+
+/*### End - For summary of a record ###*/
+
+/*### For toolTip ###*/
+.toolTip .labelCell{
+	background-color: #FEF3F3;
+	width:150px;
+}
+
+.toolTip .data{
+	background-color: #F5F5F5;
+}
+
+.toolTipHeader
+{
+	font-weight:bold;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+.toolTip .content{
+	width:98%;
+}
+
+.toolTip #mainWrapper{	
+	height:400px;
+	overflow-y: auto;
+}
+
+.toolTip .label{
+	float:left;
+	margin-left:8px;
+}
+
+.toolTip .mandatory{
+	float:left;
+	margin-left:2px;
+	margin-right:-10px;
+}
+
+.toolTip .seperator{
+	padding:0px 2px 0px 2px;
+	float:right;
+}
+
+/*### For record creation ###*/
+.createRecord
+{
+	/*background-color:#99CCFF;
+	padding: 10px;*/
+}
+
+.createRecord .inputForm .labelCell, .createRecord .recordData .labelCell{
+	background-color: #FEF3F3;
+}
+
+/*### For record update ###*/
+.updateRecord
+{
+	/*background-color:#FF9933;
+	padding: 10px;*/
+}
+
+.updateRecord .inputForm .labelCell, .updateRecord .recordData .labelCell{
+	background-color: #FEF3F3;
+}
+
+/*### For record creation ###*/
+.deleteRecord
+{
+	/*background-color:red;
+	padding: 10px;*/
+}
+
+/*###  Set the cell padding for input form ###*/
+.inputForm td{
+	padding:2px 0px;
+}
+
+/*### Set the cell padding for display of record data ###*/
+.recordData td{
+	padding:2px 0px;
+}
+
+/*### Set the spacing between each form input elements ###*/
+/*.inputForm td input, .inputForm td select, .inputForm td textarea{
+	margin:1px 4px;
+}*/
+
+/*### Set the style for mandatory fields ###*/
+.inputForm .mandatory, .recordData .mandatory{
+	float:left;
+	margin-left:2px;
+	margin-right:-10px;
+}
+
+/*### Set the style for labels ###*/
+.inputForm .label, .recordData .label{
+	float:left;
+	margin-left:10px;
+	font-weight:normal;
+}
+
+.data .group .label{
+	margin-right:2px;
+	margin-left:0px;
+	padding-top:1px;
+	line-height:18px;
+}
+
+.dataWrapper .inputForm .label{
+	float:left;
+	margin-left:4px;
+	font-weight:normal;
+	vertical-align:baseline;
+}
+
+
+.search .inputForm .tableWrapper{
+	margin-left:10px;
+}
+
+/*### Set the style for Contrast ###*/
+.required {color:red;}
+
+.label .required{
+	color:red;
+	padding-left:-6px;
+	padding-right: 1px;
+	vertical-align: base-line;
+	height:18px;	
+}
+
+.message{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.bigMessage{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+/*	text-align: center;*/
+}
+
+.listInfo{
+/*	font-family: Arial, Helvetica, sans-serif;*/
+	font-weight: bold;
+	font-size:16px;
+	vertical-align:middle;
+}
+
+.bigLabel{
+	font-size:10.5pt;
+	color:#000000;
+	font-weight:bold;
+}
+
+.bigLabel .required{
+	margin-right:2px;
+	color:#FF0000;
+}
+
+.errorLabel {
+	font-style: italic;
+	color: red;
+}
+
+.errorMessage {
+	font-weight: bold;
+	text-align: left;
+	color: red;
+}
+
+.tdContentUpdated{
+ 	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	/*width:40%;*/
+	color: #FF0000 !important;
+	background-color: #F5F5F5 !important;
+}
+
+.textArea
+{
+	align:left; 
+	width:450px; 
+	height:360px; 
+	color:black; 
+	background:white; 
+	border:1px solid #000000; 
+	overflow:auto;
+	word-break:break-all;
+}
+
+.textboxReadonly
+{
+	background-color: #F5F5F5;
+	border:0; 
+}
+
+.descriptionTextarea
+{
+    background:#F5F5F5;
+    border:1px solid #F5F5F5;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px
+}
+
+.descriptionTextareaForToolTip
+{
+    background:#F5F5F5;
+    border:1px solid #F5F5F5;
+    color: #FF0000 !important;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px
+}
+
+/**********start add by ly **********/
+.tableone {
+	background-color:#BBBBBB;
+	border: none;
+	color:#000000;
+	margin:0 auto;
+	width:100%;
+	text-align:center;
+}
+
+.tdContentUpdated .tableone{
+	border:1px solid red;
+}
+
+.tableone thead tr th{
+	text-align : center;
+}
+
+.innerb {
+	height:200px;
+	overflow-x:auto;
+	overflow-y:auto;
+	width:100%;
+}
+
+.tabletwo {
+	width:100%;
+	!width:98%;
+	border: none;
+	color:#000;
+}
+
+.tabletwo tbody tr td{
+	text-align : center;
+}
+
+.th1, .thx, .thn{
+	background-color:  #D3DCE3;
+	color:#000;
+}
+
+tr .rowodd {
+	background-color:#D5D5D5 ;
+}
+
+tr .roweven {
+	background-color:#E5E5E5  ;
+}
+
+
+.primrykey {
+	background-color:  #27A7E3;
+}
+
+
+.th1, .td1{
+	width:20px;
+}
+
+.tdx, .thx {
+	width:230px;
+}
+
+.thn {
+	width:200px;
+}
+
+.tdn {
+	width:190px;
+}
+
+/**********end add by ly **********/
+
+
+/**********start add for theme enlarge **********/
+
+.enlarge {
+	position:relative; 
+	width:75px;
+} 
+
+.enlarge a.enlargePart, #menu a.enlargePart:visited {
+	display:block; 
+	text-decoration:none; 
+	top:0; 
+	left:0; 
+	border:0;
+} 
+
+.enlarge a img {
+	border:0;
+} 
+
+.enlarge a.enlargePart:hover {
+	text-decoration:none; 
+	background-color:#F5F5F5; 
+	color:#000;
+} 
+
+.enlarge a .large {
+	display:block; 
+	position:absolute; 
+	width:0; 
+	height:0; 
+	border:0; 
+	top:0; 
+	left:0;
+} 
+
+.enlarge a.enlargePart:hover .large {
+	display:block; 
+	position:absolute; 
+	top:0px; 
+	left:50px; 
+	width:auto; 
+	height:auto; 
+	/*border:5px solid #ccc;*/
+} 
+
+/**********end add for theme enlarge **********/
+
+/******** Start for showing info of invoice summary********/
+.tablestyle2{
+	border: 1px solid #666;
+	width: 1120px!important;/* ie7 firefox*/
+	_width:1100px;/* ie6 */
+	margin: 20px 0 20px 0;
+/*	float:left; */
+	}
+
+.tablestyle2 tbody tr td {
+	padding: 2px 4px 2px 4px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.tablestyle2 tbody tr td.tdLabel{
+	width:208px;
+/*	font-size: 12px; */
+	font-weight: bold;
+	text-align: left;
+/*	background-color: #BC9DFD!important;*/
+}
+
+.tablestyle2 tbody tr td.tdData{
+	width:344px;
+	font-weight: normal;
+	text-align: left;
+/*	background-color: #F3F3F3 !important; */
+}
+
+
+/*********End for showing info of Edit Message************/
+
+/*** Control Setting Start *****/
+.dataWrapper .borderWrapper{
+	margin-left:20px;
+}
+
+
+/*** Control Setting Start *****/
+
+/*** Invoice Detail Table Style Start ***/
+.tablestyle3{
+	border: 1px solid #666;
+	width: 1120px!important;/* ie7 firefox*/
+	_width:1100px;/* ie6 */
+	margin: 20px 0 20px 0;
+/*	float:left;*/
+	background-color: #DBDBDB;
+	}
+	
+.tablestyle3 thead tr th{
+/*	  font-family:  Arial, Helvetica, sans-serif;*/
+	  font-size:  12px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  background-color: #3A02AE;
+	  padding: 1px 2px;
+	  text-align: middle;
+	  vertical-align: middle;
+	  clip:  rect(   );
+}
+
+.tablestyle3 tbody tr td {
+	padding: 1px 2px;
+	text-align: left;
+	vertical-align: middle;
+	background-color:#FFFFFF;
+}
+
+.tablestyle3 tbody tr td.amountAlign{
+	text-align:right;!important;
+}
+.input1{
+	border-left:0px;
+	border-top:0px;
+	border-right:0px;
+	border-bottom:0px;
+	text-align: right ;
+	width:95%;
+}
+
+.input2{
+	text-align: right ;
+	overflow:visible;
+	width:90%;
+
+}
+
+.oddinput3{
+	background-color:#F5F5F5;
+	color:#000000;
+	border-left:0px;
+	border-top:0px;
+	border-right:0px;
+	border-bottom:0px;
+	text-align: left;
+	width:95%;
+}
+
+.eveninput3{
+	background-color:#E2D2FF;
+	color:#000000;
+	border-left:0px;
+	border-top:0px;
+	border-right:0px;
+	border-bottom:0px;
+	text-align: left;
+	width:95%;
+}
+.input4{
+	background-attachment:fixed;
+	background-repeat: no-repeat;
+	border-left:0px;
+	border-top:0px;
+	border-right:0px;
+	border-bottom:0px;
+	text-align: left ;
+	width:99%;
+	word-wrap:break-word;
+	border-style:none;  
+	overflow:hidden;
+}
+
+.dataTable {
+	width:100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	}
+
+/*** Invoice Detail Table Style Start ***/

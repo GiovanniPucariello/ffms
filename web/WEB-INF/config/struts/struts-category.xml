@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="category" extends="oyl-default" namespace="/"> 
+        
+        <action name="initCategory" class="com.oyl.ffms.action.CategoryAction" method="init">
+        	<result >/WEB-INF/struts-views/category/categorySummary.jsp</result>
+        </action>
+        
+        <action name="initAddCategory" class="com.oyl.ffms.action.CategoryAction" method="initAdd">
+        	<result>/WEB-INF/struts-views/category/createCategory.jsp</result>
+        </action>
+        
+        <action name="saveAddCategory" class="com.oyl.ffms.action.CategoryAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/category/createCategory.jsp</result>
+        </action>
+        
+        <action name="initEditCategory" class="com.oyl.ffms.action.CategoryAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/category/editCategory.jsp</result>
+        </action>
+        
+        <action name="saveEditCategory" class="com.oyl.ffms.action.CategoryAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/category/editCategory.jsp</result>
+        </action>
+        
+        <action name="deleteCategory" class="com.oyl.ffms.action.CategoryAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/category/categorySummary.jsp</result>
+        </action>
+        
+    </package>
+</struts>

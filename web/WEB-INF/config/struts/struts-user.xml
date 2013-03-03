@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="user" extends="oyl-default" namespace="/"> 
+        
+        <action name="initUser" class="com.oyl.ffms.action.UserAction" method="init">
+        	<result >/WEB-INF/struts-views/user/userSummary.jsp</result>
+        </action>
+        
+        <action name="initAddUser" class="com.oyl.ffms.action.UserAction" method="initAdd">
+        	<result>/WEB-INF/struts-views/user/createUser.jsp</result>
+        </action>
+        
+        <action name="saveAddUser" class="com.oyl.ffms.action.UserAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/user/createUser.jsp</result>
+        </action>
+        
+        <action name="initEditUser" class="com.oyl.ffms.action.UserAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/user/editUser.jsp</result>
+        </action>
+        
+        <action name="saveEditUser" class="com.oyl.ffms.action.UserAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/user/editUser.jsp</result>
+        </action>
+        
+        <action name="deleteUser" class="com.oyl.ffms.action.UserAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/user/userSummary.jsp</result>
+        </action>
+        
+    </package>
+</struts>

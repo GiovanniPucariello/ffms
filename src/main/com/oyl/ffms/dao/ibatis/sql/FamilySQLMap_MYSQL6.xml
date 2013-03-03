@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="FamilySQL">    
+    <select id="getSummaryFamily" parameterClass="FamilyHolder" resultMap="SummaryFamilyResult">
+        SELECT FAMILY.FAMILY_OID, FAMILY_NAME, ADDRESS, PHONE, IFNULL(NUM_OF_MEMBER, 0) AS NUM_OF_MEMBER
+		FROM FAMILY LEFT JOIN (SELECT FAMILY_OID, COUNT(*) NUM_OF_MEMBER FROM FAMILY_USER GROUP BY FAMILY_OID) AS TMP
+		ON FAMILY.FAMILY_OID = TMP.FAMILY_OID
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="familyOid">
+                FAMILY.FAMILY_OID = #familyOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="familyName">
+                FAMILY_NAME like concat('%',#familyName#,'%')
+            </isNotNull>
+        </dynamic>
+        <isNotNull property="sortField">
+           	order by $sortField$ $sortOrder$ limit $startRecordNumForMySql$,$perPageSize$ 
+        </isNotNull>
+    </select>
+    
+    <select id="getCountOfFamily" parameterClass="FamilyHolder" resultClass="java.lang.Integer"> 
+        SELECT COUNT(*)
+		FROM FAMILY LEFT JOIN (SELECT FAMILY_OID, COUNT(*) NUM_OF_MEMBER FROM FAMILY_USER GROUP BY FAMILY_OID) AS TMP
+		ON FAMILY.FAMILY_OID = TMP.FAMILY_OID
+        <dynamic prepend="WHERE">
+        	<isNotNull prepend="AND" property="familyOid">
+                FAMILY.FAMILY_OID = #familyOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="familyName">
+                FAMILY_NAME like concat('%',#familyName#,'%')
+            </isNotNull>
+        </dynamic>       
+    </select>
+</sqlMap>

@@ -1,0 +1,268 @@
+/*### Start - Control site layout ###*/
+#container {
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF url(../../images/img4.gif) repeat-x;
+	color: #2B1B41;
+	min-width: 800px;
+	width: 100%;	
+	min-height: 100%;
+	position:relative;
+	float:left;
+}
+
+/*### Start - Target IE 6 only ###*/
+* html #container{
+	height:100%; /* Min height hack will cause rendering problem in IE8 when resize, so target only IE 6 */
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF url(../../images/img4.gif) repeat-x;
+	color: #2B1B41;
+}
+
+* html #container, * html #footer{
+	*width:expression(document.body.clientWidth < 802? "800px": "100%" );
+}
+/*### End - Target IE 6 only ###*/
+
+
+#nav {
+	background-color: #FFFFFF;
+	/*background:url(../../images/menu.jpg) repeat scroll top left;*/
+	width: 270px; 	
+	position: relative;
+	clear:both;
+	float: left;
+	text-align: left;	
+	margin:30px 0 50px 0;
+	z-index:1;
+/*	min-height:600px;
+	height:80%;*/
+}
+
+#main {
+	margin: 0px 0px 40px 276px;
+	zoom:1;
+	}
+
+#mainWrapper {
+	width:100%;
+	overflow-x: hidden;
+	padding:2px 0px; /* Prevent margin collapse */}
+
+#footer {
+	width:100%;
+	min-width: 800px;
+	clear:both;
+	position:absolute;
+	left: 0px;
+	bottom: 0px;
+	margin-top:10px;
+}
+
+/*### End - Control site layout ###*/
+
+
+/* Added By Edwin */
+/*### Start - Common Styles ###*/
+
+	/*### Start - Overide default HTML styles ###*/
+		html, body {
+			height: 100%;
+			}
+			
+		html *{
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 11px;
+			font-weight: normal;
+			margin:0px;
+			outline:none;
+			}
+		
+		div, img{
+			border:0px;}
+		
+		body, div, span{
+			padding:0px;
+			}
+			
+		a:link, a:visited, a:active {
+			color:#9CC3DE;
+			text-decoration:none;
+		}
+		
+		a:hover{
+			/*background-color:pink;
+			font-weight:bold;*/
+			color:#93C600;
+			text-decoration:underline;
+			}
+	
+	/*### End - Overide default HTML styles ###*/	
+	
+	
+	/*### Container used for grouping items ###*/
+	.group{
+		margin-right:20px;}
+	
+	/*### Style for title ###*/
+	.title{	
+		font-weight: bold;
+		color: #000000;
+		vertical-align:middle;
+		line-height:20px;
+	}
+	
+	/*### Container for paging of records ###*/
+	.paging {
+		height:30px;
+		margin:10px 0px;}
+
+	/*### Container for main contents ###*/
+	.content {
+		width:100%;
+		overflow-x:auto;
+		margin:10px 0px;
+		}
+	
+	/*### Container for inner table ###*/
+	.innerTable{
+		border-collapse: collapse;
+	}
+	
+	.innerTable .text{
+		padding: 0px 10px;
+	}
+	
+	/*### Container for displaying information such as validation error, action status etc... ###*/
+	.info {
+		margin:10px 0px;
+		font-weight: bold;
+		padding:0 10px;
+	}  
+	
+	/*### Container for adding spacer between two divs ###*/
+	.spacer{
+		height:10px;
+	}
+	
+	/*### Generic style set for page labels ###*/
+	.label, .dataLabel{
+		font-weight:bold;
+	}
+	
+	/*### Seperator used between label and value ###*/
+	.recordWrapper .seperator{
+		padding:0px 10px 0px 2px;}
+		
+	.inputForm .seperator, .recordData .seperator{
+		padding:2px 4px 2px 2px;
+		float:right;
+	}
+	
+	.dataWrapper .seperator{
+		padding:0px 10px 0px 2px !important;
+	}
+	
+			
+	/*### To indicate mandatory fields ###*/
+	.mandatory{ 
+		color:#FF0000; 
+		font-weight:bold;
+	}
+			
+	/*### Start - Generic styles for display of records ###*/
+		.record .recordWrapper, .dataWrapper{
+			overflow:hidden; /* used to contain floats */
+			position:relative;
+			zoom:1;
+			background-color: #fff;
+			margin-bottom:10px;
+			}
+			
+		.record .inputForm .labelCell, .record .recordData .labelCell{
+			width:30%;
+			}
+			
+		.popup .record .labelCell{
+			width:50%;
+			}
+		/*
+		.record .inputForm td.data, .record .recordData td.data{
+			background-color: #F5F5F5;
+			}
+			
+		.record .inputForm td.labelCell, .record .recordData td.labelCell{
+			background-color: #FEF3F3;
+			}
+		*/
+		
+		/*
+		.dataWrapper{
+			overflow:hidden; /* used to contain floats */
+		/*	position:relative;
+			zoom:1;
+			background-color: #fff;
+			margin-bottom:10px;
+			}
+		*/	
+		
+		.dataWrapper .inputForm .labelCell{
+			width:30% !important;
+			vertical-align:top;
+			}
+			
+		.dataWrapper .inputForm td.data{
+			background-color: #F3F3F3!important;
+			line-height:22px !important;
+			}
+			
+		.dataWrapper .inputForm td.labelCell{
+			background-color: #BC9DFD!important;
+			line-height:22px !important;
+			}
+		
+		.dataWrapper .inputForm td.data .dataDisplay{
+			padding:0 3px;
+			}
+			
+
+	/*### End - Common styles for display of records ###*/
+	
+	
+	/*### Used to clear floats ###*/
+	.clear{ 
+		clear: both;
+		height:0px;
+		width:0px;
+		overflow:hidden;  /* To prevent bottom margin of this element container from missing */ }
+		
+    /*### Start - design for basic html component, e.g. inputbox, radio button*/
+	.radioButton{ /* radio button*/
+		margin:0 2px 0 0;
+		vertical-align:baseline;
+	}
+
+	.inputBox { /* inputBox*/
+ 		height:20px;
+		line-height:18px;
+		vertical-align: baseline;
+		padding-top:2px;
+		margin-right:5px;
+		margin-left:2px;
+	}
+	
+	/* ### Start - set select height needs div to simulate.*/
+	.select{
+		height:20px;
+		margin-left:2px;
+	/*	width:135px;  */
+	}
+	
+	.chk{ /* checkbox*/
+		margin-left:2px;
+	}
+
+	/*### End -*/
+	
+/*### End - Common Styles */

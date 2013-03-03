@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings enhancementEnabled="true" maxTransactions="20"
+		maxRequests="32" maxSessions="10" />
+
+	<!-- Identify all SQL Map XML files to be loaded by this SQL map. Relative to classpath -->
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/OidSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/CtlParamSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/ModuleSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/UserProfileSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/UserProfileSQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/FamilySQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/FamilySQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/FamilyUserSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/UserRoleSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/CategorySQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/CategorySQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/ItemSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/ItemSQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/BankCardSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/BankCardSQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/BankCardRecordSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/BankCardRecordSQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/CreditCardSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/CreditCardSQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/CreditCardRecordSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/CreditCardRecordSQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/SalaryRecordSQLMap.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/SalaryRecordSQLMap_MYSQL6.xml" />
+	<sqlMap resource="com/oyl/ffms/dao/ibatis/sql/ReportSQLMap.xml" />
+</sqlMapConfig>

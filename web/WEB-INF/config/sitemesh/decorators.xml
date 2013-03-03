@@ -1,0 +1,27 @@
+<decorators defaultdir="/WEB-INF/struts-views/decorators">
+    <!-- Any urls that are excluded will never be decorated by Sitemesh -->
+    <excludes>     
+    	<pattern>/404*</pattern> 
+    	<pattern>/500*</pattern>
+    	<pattern>/ajax*</pattern>
+    </excludes>
+
+    <decorator name="commonLogin" page="commonLoginTemplate.jsp">
+        <pattern>/login*</pattern>
+        <pattern>/logout*</pattern>
+        <pattern>/home*</pattern>
+        <pattern>/forgotPassword*</pattern>
+        <pattern>/saveForgotPassword*</pattern>
+        <pattern>/saveEditChangePwd*</pattern>
+    </decorator>  
+    
+    <decorator name="popupWindown" page="popupTemplate.jsp">
+    	<pattern>/print*</pattern>
+    	<pattern>/popup*</pattern>
+    </decorator>     
+    
+    <decorator name="main" page="decorator.jsp">
+		<pattern>/*</pattern>
+    </decorator>
+    
+</decorators>

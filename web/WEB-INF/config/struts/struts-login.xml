@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="login" extends="oyl-default" namespace="/"> 
+        <action name="home" >
+			<interceptor-ref name="userLoginStack" />
+            <result>/WEB-INF/struts-views/login/loginForm.jsp</result>
+        </action>
+        
+        <action name="main">
+        	<result name="success">/WEB-INF/struts-views/welcome.jsp</result>
+        </action>
+        
+        <action name="login" class="com.oyl.ffms.action.LoginAction" method="login">
+			<interceptor-ref name="userLoginStack" />
+        	<result type="redirect">main.action</result>
+            <result name="input">/WEB-INF/struts-views/login/loginForm.jsp</result>
+        </action>
+        
+        <action name="logout"  class="com.oyl.ffms.action.LoginAction" method="logout">
+			<interceptor-ref name="userLoginStack" />
+            <result>/WEB-INF/struts-views/login/loginForm.jsp</result>
+        </action>
+    </package>
+</struts>

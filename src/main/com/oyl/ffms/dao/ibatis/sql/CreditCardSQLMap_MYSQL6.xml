@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="CreditCardSQL">    
+    <select id="getSummaryCreditCard" parameterClass="CreditCardHolder" resultMap="SummaryCreditCardResult">
+        SELECT   CC_OID
+				,CARD_NO
+				,QUOTA
+				,DEBT
+				,POINT
+				,C.USER_OID
+				,USER_NAME
+		FROM CREDIT_CARD C, USER_PROFILE U
+		WHERE C.USER_OID = U.USER_OID
+        <dynamic>
+            <isNotNull prepend="AND" property="cardNo">
+                CARD_NO like concat('%',#cardNo#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                C.USER_OID = #userOid#
+            </isNotNull>
+			<isNotNull prepend="AND" property="curUserOid">
+                C.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN (SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID=#curUserOid#))
+            </isNotNull>
+        </dynamic>
+        <isNotNull property="sortField">
+           	order by $sortField$ $sortOrder$ limit $startRecordNumForMySql$,$perPageSize$ 
+        </isNotNull>
+    </select>
+    
+    <select id="getCountOfCreditCard" parameterClass="CreditCardHolder" resultClass="java.lang.Integer"> 
+        select count(*) as CNT
+        FROM CREDIT_CARD C, USER_PROFILE U
+		WHERE C.USER_OID = U.USER_OID
+        <dynamic>
+            <isNotNull prepend="AND" property="cardNo">
+                CARD_NO like concat('%',#cardNo#,'%')
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                C.USER_OID = #userOid#
+            </isNotNull>
+			<isNotNull prepend="AND" property="curUserOid">
+                C.USER_OID IN (SELECT USER_OID FROM FAMILY_USER WHERE FAMILY_OID IN (SELECT FAMILY_OID FROM FAMILY_USER WHERE USER_OID=#curUserOid#))
+            </isNotNull>
+        </dynamic>
+    </select>
+</sqlMap>

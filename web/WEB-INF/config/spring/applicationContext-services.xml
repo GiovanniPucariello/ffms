@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+       
+	<bean id="ctlParamService"
+		class="com.oyl.ffms.service.impl.CtlParamServiceImpl">
+		<property name="dao">
+			<ref bean="ctlParamDao" />
+		</property>
+	</bean>
+	
+	<bean id="moduleService"
+		class="com.oyl.ffms.service.impl.ModuleServiceImpl">
+		<property name="dao">
+			<ref bean="moduleDao" />
+		</property>
+	</bean>
+	
+	<bean id="userProfileService"
+		class="com.oyl.ffms.service.impl.UserProfileServiceImpl">
+		<property name="dao">
+			<ref bean="userProfileDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+		<property name="familyUserDao">
+			<ref bean="familyUserDao" />
+		</property>
+		<property name="userRoleDao">
+			<ref bean="userRoleDao" />
+		</property>
+	</bean>
+	
+	<bean id="familyService"
+		class="com.oyl.ffms.service.impl.FamilyServiceImpl">
+		<property name="dao">
+			<ref bean="familyDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+		<property name="familyUserDao">
+			<ref bean="familyUserDao"/>
+		</property>
+		<property name="userProfileDao">
+			<ref bean="userProfileDao"/>
+		</property>
+	</bean>
+	
+	<bean id="familyUserService"
+		class="com.oyl.ffms.service.impl.FamilyUserServiceImpl">
+		<property name="dao">
+			<ref bean="familyUserDao" />
+		</property>
+	</bean>
+	
+	<bean id="categoryService"
+		class="com.oyl.ffms.service.impl.CategoryServiceImpl">
+		<property name="dao">
+			<ref bean="categoryDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+	</bean>
+	
+	<bean id="itemService"
+		class="com.oyl.ffms.service.impl.ItemServiceImpl">
+		<property name="dao">
+			<ref bean="itemDao" />
+		</property>
+		<property name="familyDao">
+			<ref bean="familyDao" />
+		</property>
+		<property name="familyUserDao">
+			<ref bean="familyUserDao" />
+		</property>
+		<property name="categoryDao">
+			<ref bean="categoryDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+		<property name="bankCardDao">
+            <ref bean="bankCardDao" />
+        </property>
+        <property name="bankCardRecordDao">
+            <ref bean="bankCardRecordDao" />
+        </property>
+		<property name="creditCardDao">
+			<ref bean="creditCardDao" />
+		</property>
+		<property name="creditCardRecordDao">
+			<ref bean="creditCardRecordDao" />
+		</property>
+	</bean>
+	
+	<bean id="bankCardService"
+		class="com.oyl.ffms.service.impl.BankCardServiceImpl">
+		<property name="dao">
+			<ref bean="bankCardDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+		<property name="salaryRecordDao">
+			<ref bean="salaryRecordDao" />
+		</property>
+	</bean>
+	
+	<bean id="bankCardRecordService"
+		class="com.oyl.ffms.service.impl.BankCardRecordServiceImpl">
+		<property name="dao">
+			<ref bean="bankCardRecordDao" />
+		</property>
+		<property name="bankCardDao">
+			<ref bean="bankCardDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+	</bean>
+	
+	<bean id="creditCardService"
+		class="com.oyl.ffms.service.impl.CreditCardServiceImpl">
+		<property name="dao">
+			<ref bean="creditCardDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+		<property name="itemDao">
+			<ref bean="itemDao" />
+		</property>
+	</bean>
+	
+	<bean id="creditCardRecordService"
+		class="com.oyl.ffms.service.impl.CreditCardRecordServiceImpl">
+		<property name="dao">
+			<ref bean="creditCardRecordDao" />
+		</property>
+		<property name="creditCardDao">
+			<ref bean="creditCardDao" />
+		</property>
+		<property name="bankCardDao">
+			<ref bean="bankCardDao" />
+		</property>
+		<property name="bankCardRecordDao">
+			<ref bean="bankCardRecordDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+	</bean>
+	
+	<bean id="salaryRecordService"
+		class="com.oyl.ffms.service.impl.SalaryRecordServiceImpl">
+		<property name="dao">
+			<ref bean="salaryRecordDao" />
+		</property>
+		<property name="bankCardDao">
+			<ref bean="bankCardDao" />
+		</property>
+		<property name="bankCardRecordDao">
+			<ref bean="bankCardRecordDao" />
+		</property>
+		<property name="oidDao">
+			<ref bean="oidDao" />
+		</property>
+	</bean>
+	
+	<bean id="reportService"
+        class="com.oyl.ffms.service.impl.ReportServiceImpl">
+        <property name="dao">
+            <ref bean="reportDao" />
+        </property>
+    </bean>
+	
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- all methods starting with 'insert' requires a transaction -->
+			<tx:method name="insert*" read-only="false"
+				propagation="REQUIRED" rollback-for="Exception" />
+			
+			<!-- all methods starting with 'update' requires a transaction -->	
+			<tx:method name="update*" read-only="false"
+				propagation="REQUIRED" rollback-for="Exception" />
+				
+			<!-- all methods starting with 'delete' requires a transaction -->
+			<tx:method name="delete*" read-only="false"
+				propagation="REQUIRED" rollback-for="Exception" />
+			
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<tx:advice id="CustomedAdvice" transaction-manager="transactionManager">
+		<!-- the transactional semantics...  -->
+		<tx:attributes>	
+			<!-- all methods starting with 'confirm' requires a transaction -->	
+		    <tx:method name="confirm*" read-only="false"
+				propagation="REQUIRED" rollback-for="Exception" />
+				
+			<!-- all methods starting with 'transfer' requires a transaction -->	
+		    <tx:method name="transfer*" read-only="false"
+				propagation="REQUIRED" rollback-for="Exception" />
+				
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="dbActionOperations"
+			expression="execution(* com.oyl.base.service.DBActionService.*(..))" />
+		
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="dbActionOperations" />
+			
+		<aop:advisor advice-ref="CustomedAdvice"
+			pointcut="execution(* com.oyl.ffms.service.BankCardRecordService.confirmBankCardRecord(..))" />
+			
+		<aop:advisor advice-ref="CustomedAdvice"
+			pointcut="execution(* com.oyl.ffms.service.BankCardRecordService.transfer(..))" />
+			
+		<aop:advisor advice-ref="CustomedAdvice"
+			pointcut="execution(* com.oyl.ffms.service.SalaryRecordService.confirmSalaryRecord(..))" />
+			
+		<aop:advisor advice-ref="CustomedAdvice"
+			pointcut="execution(* com.oyl.ffms.service.CreditCardRecordService.confirmCreditCardRecord(..))" />
+			
+		<aop:advisor advice-ref="CustomedAdvice"
+			pointcut="execution(* com.oyl.ffms.service.ItemService.confirmItem(..))" />
+	</aop:config>
+</beans>

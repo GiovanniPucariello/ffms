@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+    <package name="creditCard" extends="oyl-default" namespace="/"> 
+        
+        <action name="initCreditCard" class="com.oyl.ffms.action.CreditCardAction" method="init">
+        	<result >/WEB-INF/struts-views/creditCard/creditCardSummary.jsp</result>
+        </action>
+        
+        <action name="initAddCreditCard" class="com.oyl.ffms.action.CreditCardAction" method="initAdd">
+        	<result name="success">/WEB-INF/struts-views/creditCard/createCreditCard.jsp</result>
+        </action>
+		
+		<action name="saveAddCreditCard" class="com.oyl.ffms.action.CreditCardAction" method="saveAdd">
+        	<result name="input">/WEB-INF/struts-views/creditCard/createCreditCard.jsp</result>
+        </action>
+        
+		<action name="initEditCreditCard" class="com.oyl.ffms.action.CreditCardAction" method="initEdit">
+        	<result >/WEB-INF/struts-views/creditCard/editCreditCard.jsp</result>
+        </action>
+        
+        <action name="saveEditCreditCard" class="com.oyl.ffms.action.CreditCardAction" method="saveEdit">
+        	<result name="input">/WEB-INF/struts-views/creditCard/editCreditCard.jsp</result>
+        </action>
+        
+        <action name="deleteCreditCard" class="com.oyl.ffms.action.CreditCardAction" method="saveDelete">
+        	<result name="input">/WEB-INF/struts-views/creditCard/creditCardSummary.jsp</result>
+        </action>
+    </package>
+</struts>

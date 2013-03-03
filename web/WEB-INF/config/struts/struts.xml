@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<include file="struts-common-constants.xml"/>
+
+	<package name="oyl-default" extends="struts-default,jasperreports-default" namespace="/">
+		<interceptors>
+			<interceptor name="initSession"
+				class="com.oyl.ffms.interceptor.InitSessionInterceptor" />			
+		 	
+			<interceptor name="checkUser"
+				class="com.oyl.ffms.interceptor.CheckUserLoginInterceptor" />
+			<!-- 
+			<interceptor name="authority" 
+				class="com.pracbiz.common.interceptor.AuthorityInterceptor" /> -->
+				
+			<!-- default stack -->
+			<interceptor-stack name="oylDefaultStack">
+				<interceptor-ref name="initSession" />
+				<interceptor-ref name="checkUser" />
+				<!-- <interceptor-ref name="authority"/>	 -->
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="userLoginStack">
+				<interceptor-ref name="initSession" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack> 
+			
+		</interceptors>
+		
+		<default-interceptor-ref name="oylDefaultStack" />
+
+		<global-results>	
+            <result name="commonMessage">
+                /WEB-INF/struts-views/common/commonMessage.jsp
+            </result>
+            <result name="accessDenied">
+            	/WEB-INF/struts-views/exception/accessDenied.jsp
+            </result>
+            <result name="lostLogin">
+            	/WEB-INF/struts-views/exception/lostLogin.jsp
+            </result>        
+		</global-results>
+		
+	</package>
+	
+	<include file="struts-login.xml" />
+	<include file="struts-myprofile.xml" />
+	<include file="struts-family.xml" />
+	<include file="struts-user.xml" />
+	<include file="struts-category.xml" />
+	<include file="struts-item.xml" />
+	<include file="struts-bankcard.xml" />
+	<include file="struts-bankcardrecord.xml" />
+	<include file="struts-creditcard.xml" />
+	<include file="struts-creditcardrecord.xml" />
+	<include file="struts-salaryrecord.xml" />
+	<include file="struts-ajax.xml" />
+	<include file="struts-report-item.xml" />
+	<include file="struts-report-salary.xml" />
+</struts>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ItemSQL">
+    <typeAlias alias="ItemHolder" type="com.oyl.ffms.holder.ItemHolder"/>
+
+    <resultMap id="ItemResult" class="ItemHolder">
+        <result property="itemOid" column="ITEM_OID"/>
+        <result property="categoryOid" column="CATEGORY_OID"/>
+        <result property="itemDesc" column="ITEM_DESC"/>
+        <result property="itemCost" column="ITEM_COST"/>
+        <result property="itemQuantity" column="ITEM_QUANTITY"/>
+        <result property="userOid" column="USER_OID"/>
+        <result property="ctlStatus" column="CTL_STATUS"/>
+        <result property="createDate" column="CREATE_DATE"/>
+		<result property="ccOid" column="CC_OID" />
+		<result property="bcOid" column="BC_OID" />
+    </resultMap>
+    <resultMap id="SummaryItemResult" class="ItemHolder">
+        <result property="itemOid" column="ITEM_OID"/>
+        <result property="categoryName" column="CATEGORY_NAME"/>
+        <result property="userAlias" column="USER_ALIAS"/>
+        <result property="itemDesc" column="ITEM_DESC"/>
+        <result property="itemTotalCost" column="ITEM_TOTAL_COST"/>
+        <result property="ctlStatus" column="CTL_STATUS"/>
+        <result property="createDate" column="CREATE_DATE"/>
+    </resultMap>
+    
+    <insert id="insertItem" parameterClass="ItemHolder">
+	        insert into ITEM (
+	             ITEM_OID
+	            ,CATEGORY_OID
+	            ,ITEM_DESC
+	            ,ITEM_COST
+	            ,ITEM_QUANTITY
+	            ,USER_OID
+	            ,CTL_STATUS
+	            ,CREATE_DATE
+				,CC_OID
+				,BC_OID
+	        ) values (
+	             #itemOid:NUMERIC#
+	            ,#categoryOid:NUMERIC#
+	            ,#itemDesc:VARCHAR#
+	            ,#itemCost:NUMERIC#
+	            ,#itemQuantity:NUMERIC#
+	            ,#userOid:NUMERIC#
+	            ,#ctlStatus:VARCHAR#
+	            ,#createDate:TIMESTAMP#
+				,#ccOid:NUMERIC#
+				,#bcOid:NUMERIC#
+	        )
+    </insert>
+
+    <delete id="deleteItem" parameterClass="ItemHolder">
+        delete from ITEM 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="itemOid">
+                ITEM_OID = #itemOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryOid">
+                CATEGORY_OID = #categoryOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemDesc">
+                ITEM_DESC = #itemDesc#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemCost">
+                ITEM_COST = #itemCost#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemQuantity">
+                ITEM_QUANTITY = #itemQuantity#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ctlStatus">
+                CTL_STATUS = #ctlStatus#
+            </isNotNull>
+            <isNotNull prepend="AND" property="createDate">
+                CREATE_DATE = #createDate#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getItems" parameterClass="ItemHolder"
+		resultMap="ItemResult">
+		select * from ITEM
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="itemOid">
+                ITEM_OID = #itemOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="categoryOid">
+                CATEGORY_OID = #categoryOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemDesc">
+                ITEM_DESC = #itemDesc#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemCost">
+                ITEM_COST = #itemCost#
+            </isNotNull>
+            <isNotNull prepend="AND" property="itemQuantity">
+                ITEM_QUANTITY = #itemQuantity#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ctlStatus">
+                CTL_STATUS = #ctlStatus#
+            </isNotNull>
+            <isNotNull prepend="AND" property="createDate">
+                CREATE_DATE = #createDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="fromDate">
+                UPDATE_DATE <![CDATA[>=]]> #fromDate#
+            </isNotNull>
+            <isNotNull prepend="AND" property="toDate">
+                UPDATE_DATE <![CDATA[<=]]> #toDate#
+            </isNotNull>
+			<isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="bcOid">
+                BC_OID = #bcOid#
+            </isNotNull>
+        </dynamic>
+	</select>
+	
+	<update id="updateItem" parameterClass="ItemHolder">
+        update ITEM set 
+             CATEGORY_OID = #categoryOid:NUMERIC#
+            ,ITEM_DESC = #itemDesc:VARCHAR#
+            ,ITEM_COST = #itemCost:NUMERIC#
+            ,ITEM_QUANTITY = #itemQuantity:NUMERIC#
+            ,USER_OID = #userOid:NUMERIC#
+            ,CTL_STATUS = #ctlStatus:VARCHER#
+            ,CREATE_DATE = #createDate:TIMESTAMP#
+			,CC_OID = #ccOid:NUMERIC#
+			,BC_OID = #bcOid:NUMERIC#
+            where ITEM_OID = #itemOid:NUMERIC#
+    </update>
+</sqlMap>

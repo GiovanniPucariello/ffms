@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FamilySQL">
+    <typeAlias alias="FamilyHolder" type="com.oyl.ffms.holder.FamilyHolder"/>
+
+    <resultMap id="FamilyResult" class="FamilyHolder">
+        <result property="familyOid" column="FAMILY_OID"/>
+        <result property="familyName" column="FAMILY_NAME"/>
+		<result property="address" column="ADDRESS" />
+		<result property="phone" column="PHONE" />
+    </resultMap>
+    
+    <resultMap id="SummaryFamilyResult" class="FamilyHolder">
+        <result property="familyOid" column="FAMILY_OID"/>
+        <result property="familyName" column="FAMILY_NAME"/>
+		<result property="address" column="ADDRESS" />
+		<result property="phone" column="PHONE" />
+		<result property="numOfMember" column="NUM_OF_MEMBER" />
+    </resultMap>
+    
+    <insert id="insertFamily" parameterClass="FamilyHolder">
+	        insert into FAMILY (
+	             FAMILY_OID
+	            ,FAMILY_NAME
+				,ADDRESS
+				,PHONE
+	        ) values (
+	             #familyOid:NUMERIC#
+	            ,#familyName:VARCHAR#
+				,#address:VARCHAR#
+				,#phone:VARCHAR#
+	        )
+    </insert>
+
+    <update id="updateFamily" parameterClass="FamilyHolder">
+        update FAMILY set 
+              FAMILY_NAME = #familyName:VARCHAR#
+			 ,ADDRESS=#address:VARCHAR#
+			 ,PHONE=#phone:VARCHAR#
+            where FAMILY_OID = #familyOid#
+    </update>
+
+    <delete id="deleteFamily" parameterClass="FamilyHolder">
+        delete from FAMILY 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="familyOid">
+                FAMILY_OID = #familyOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="familyName">
+                FAMILY_NAME = #familyName#
+            </isNotNull>
+			<isNotNull prepend="AND" property="address">
+                ADDRESS = #address#
+            </isNotNull>
+			<isNotNull prepend="AND" property="phone">
+                PHONE = #phone#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getFamilies" parameterClass="FamilyHolder"
+		resultMap="FamilyResult">
+		select * from FAMILY
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="familyOid">
+                FAMILY_OID = #familyOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="familyName">
+                FAMILY_NAME = #familyName#
+            </isNotNull>
+			<isNotNull prepend="AND" property="address">
+                ADDRESS = #address#
+            </isNotNull>
+			<isNotNull prepend="AND" property="phone">
+                PHONE = #phone#
+            </isNotNull>
+        </dynamic>
+		<isNotNull property="sortField">
+			order by $sortField$
+		</isNotNull>
+		<isNull property="sortField">
+			order by FAMILY_OID
+		</isNull>
+	</select>
+
+</sqlMap>

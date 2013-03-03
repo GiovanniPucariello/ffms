@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="CreditCardRecordSQL">    
+    <select id="getSummaryCreditCardRecord" parameterClass="CreditCardRecordHolder" resultMap="SummaryCreditCardRecordResult">
+        SELECT   CCR_OID
+				,CCR_TYPE
+				,AMOUNT
+				,DESCRIPTION
+				,CTL_STATUS
+				,CREATE_DATE
+				,CC_OID
+		FROM CREDIT_CARD_RECORD
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="description">
+                DESCRIPTION like concat('%',#description#,'%')
+            </isNotNull>
+			<isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+        </dynamic>
+        <isNotNull property="sortField">
+           	order by $sortField$ $sortOrder$ limit $startRecordNumForMySql$,$perPageSize$ 
+        </isNotNull>
+    </select>
+    
+    <select id="getCountOfCreditCardRecord" parameterClass="CreditCardRecordHolder" resultClass="java.lang.Integer"> 
+        select count(*) as CNT
+        FROM CREDIT_CARD_RECORD
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="description">
+                DESCRIPTION like concat('%',#description#,'%')
+            </isNotNull>
+			<isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+        </dynamic>
+    </select>
+</sqlMap>

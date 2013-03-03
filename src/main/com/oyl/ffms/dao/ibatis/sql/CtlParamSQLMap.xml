@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CtlParamSQL">
+    <typeAlias alias="CtlParamHolder" type="com.oyl.ffms.holder.CtlParamHolder"/>
+
+    <resultMap id="CtlParamResult" class="CtlParamHolder">
+        <result property="ctlGrp" column="CTL_GRP"/>
+        <result property="ctlKey" column="CTL_KEY"/>
+        <result property="ctlValue" column="CTL_VALUE"/>
+    </resultMap>
+    
+    <insert id="insertCtlParam" parameterClass="CtlParamHolder">
+	        insert into CTL_PARAM (
+	             CTL_GRP
+	            ,CTL_KEY
+	            ,CTL_VALUE
+	        ) values (
+	             #ctlGrp:VARCHAR#
+	            ,#ctlKey:VARCHAR#
+	            ,#ctlValue:VARCHAR#
+	        )
+    </insert>
+
+    <update id="updateCtlParam" parameterClass="CtlParamHolder">
+        update CTL_PARAM set 
+            CTL_VALUE = #ctlValue:VARCHAR#
+            where CTL_GRP = #ctlGrp:VARCHAR#
+            and   CTL_KEY = #ctlKey:VARCHAR#
+    </update>
+
+    <!-- delete sql -->
+    <delete id="deleteCtlParam" parameterClass="CtlParamHolder">
+        delete from CTL_PARAM 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="ctlGrp">
+                CTL_GRP = #ctlGrp#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ctlKey">
+                CTL_KEY = #ctlKey#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ctlValue">
+                CTL_VALUE = #ctlValue#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getCtlParams" parameterClass="CtlParamHolder"
+		resultMap="CtlParamResult">
+		select * from CTL_PARAM
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="ctlGrp">
+                CTL_GRP = #ctlGrp#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ctlKey">
+                CTL_KEY = #ctlKey#
+            </isNotNull>
+            <isNotNull prepend="AND" property="ctlValue">
+                CTL_VALUE = #ctlValue#
+            </isNotNull>
+        </dynamic>
+		<isNotNull property="sortField">
+			order by $sortField$
+		</isNotNull>
+		<isNull property="sortField">
+			order by CTL_GRP, CTL_KEY
+		</isNull>
+	</select>
+
+
+</sqlMap>

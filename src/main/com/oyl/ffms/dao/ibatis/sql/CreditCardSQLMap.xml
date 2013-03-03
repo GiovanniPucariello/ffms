@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CreditCardSQL">
+    <typeAlias alias="CreditCardHolder" type="com.oyl.ffms.holder.CreditCardHolder"/>
+
+    <resultMap id="CreditCardResult" class="CreditCardHolder">
+        <result property="ccOid" column="CC_OID"/>
+        <result property="cardNo" column="CARD_NO"/>
+        <result property="quota" column="QUOTA"/>
+		<result property="debt" column="DEBT"/>
+		<result property="point" column="POINT"/>
+		<result property="pointCondition" column="POINT_CONDITION"/>
+        <result property="userOid" column="USER_OID"/>
+    </resultMap>
+    
+    <resultMap id="SummaryCreditCardResult" class="CreditCardHolder">
+        <result property="ccOid" column="CC_OID"/>
+        <result property="cardNo" column="CARD_NO"/>
+        <result property="quota" column="QUOTA"/>
+		<result property="debt" column="DEBT"/>
+		<result property="point" column="POINT"/>
+		<result property="userOid" column="USER_OID" />
+        <result property="userName" column="USER_NAME"/>
+    </resultMap> 
+    
+    <insert id="insertCreditCard" parameterClass="CreditCardHolder">
+	        insert into CREDIT_CARD (
+	             CC_OID
+	            ,CARD_NO
+	            ,QUOTA
+				,DEBT
+				,POINT
+				,POINT_CONDITION
+	            ,USER_OID
+	        ) values (
+	             #ccOid:NUMERIC#
+	            ,#cardNo:VARCHAR#
+				,#quota:NUMERIC#
+				,#debt:NUMERIC#
+				,#point:NUMERIC#
+				,#pointCondition:NUMERIC#
+	            ,#userOid:NUMERIC#
+	        )
+    </insert>
+
+    <update id="updateCreditCard" parameterClass="CreditCardHolder">
+        update CREDIT_CARD set 
+			CARD_NO         = #cardNo:VARCHAR#,
+			QUOTA           = #quota:NUMERIC#,
+			DEBT            = #debt:NUMERIC#,
+			POINT           = #point:NUMERIC#,
+			POINT_CONDITION = #pointCondition:NUMERIC#,
+            USER_OID        = #userOid:NUMERIC#
+            where CC_OID = #ccOid:NUMERIC#
+    </update>
+
+    <!-- delete sql -->
+    <delete id="deleteCreditCard" parameterClass="CreditCardHolder">
+        delete from CREDIT_CARD 
+        <dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="cardNo">
+                CARD_NO = #cardNo#
+            </isNotNull>
+            <isNotNull prepend="AND" property="quota">
+                QUOTA = #quota#
+            </isNotNull>
+			<isNotNull prepend="AND" property="debt">
+                DEBT = #debt#
+            </isNotNull>
+            <isNotNull prepend="AND" property="point">
+                POINT = #point#
+            </isNotNull>
+            <isNotNull prepend="AND" property="pointCondition">
+                POINT_CONDITION = #pointCondition#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+        </dynamic>
+    </delete>
+    
+    <select id="getCreditCards" parameterClass="CreditCardHolder"
+		resultMap="CreditCardResult">
+		select * from CREDIT_CARD
+		<dynamic prepend="WHERE">
+            <isNotNull prepend="AND" property="ccOid">
+                CC_OID = #ccOid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="cardNo">
+                CARD_NO = #cardNo#
+            </isNotNull>
+            <isNotNull prepend="AND" property="quota">
+                QUOTA = #quota#
+            </isNotNull>
+			<isNotNull prepend="AND" property="debt">
+                DEBT = #debt#
+            </isNotNull>
+            <isNotNull prepend="AND" property="point">
+                POINT = #point#
+            </isNotNull>
+            <isNotNull prepend="AND" property="pointCondition">
+                POINT_CONDITION = #pointCondition#
+            </isNotNull>
+            <isNotNull prepend="AND" property="userOid">
+                USER_OID = #userOid#
+            </isNotNull>
+        </dynamic>
+	</select>
+
+</sqlMap>

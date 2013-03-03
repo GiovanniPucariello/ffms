@@ -1,0 +1,168 @@
+/**<== the cssHorizontal menu define ==>**/
+
+ul#primary-nav,
+ul#primary-nav ul {
+       margin: 0px;
+       padding: 0px;
+       width: 150px; /* Width of Menu Items */
+       border-bottom: 1px solid #ccc;
+       background: #fff; /* IE6 Bug */
+       font-size: 100%;
+    }
+
+ul#primary-nav li {
+       position: relative;
+       list-style: none;
+    }
+
+ul#primary-nav li a {
+       display: block;
+       text-decoration: none;
+       color: #777;
+       padding: 5px;
+       border: 1px solid #ccc;
+       border-bottom: 0;
+    }
+
+    /* Fix IE. Hide from IE Mac \*/
+     * html ul#primary-nav li { float: left; height: 1%; }
+     * html ul#primary-nav li a { height: 1%; }
+    /* End */
+
+ul#primary-nav ul {
+       position: absolute;
+       display: none;
+       left: 149px; /* Set 1px less than menu width */
+       top: 0;
+     }
+
+ul#primary-nav li ul li a { padding: 2px 5px; }
+ /* Sub Menu Styles */
+
+ul#primary-nav li:hover ul ul,
+ul#primary-nav li:hover ul ul ul,
+ul#primary-nav li.over ul ul,
+ul#primary-nav li.over ul ul ul { display: none; }
+ /* Hide sub-menus initially */
+
+ul#primary-nav li:hover ul,
+ul#primary-nav li li:hover ul,
+ul#primary-nav li li li:hover ul,
+ul#primary-nav li.over ul,
+ul#primary-nav li li.over ul,
+ul#primary-nav li li li.over ul { display: block; } /* The magic */
+
+ul#primary-nav li.menubar { background: transparent url(../../../images/default/current/arrow.gif) right center no-repeat; }
+
+ul#primary-nav li:hover,
+ul#primary-nav li.over { background-color: #f9f9f9; }
+
+ul#primary-nav li a:hover { color: #E2144A; }
+
+/**<== end of the cssHorizontal menu define ==>**/
+
+
+/**<==menuExpandable menu define ==>**/
+
+#dynamicMenu{
+	margin:0px auto;
+	width:90%;
+   /* font-family: Arial, Helvetica, sans-serif;*/
+	font-size:12px;
+	float:left;
+}
+
+.menuList {
+	margin: 15px 10px 10px 5px;
+	padding: 0px;
+}
+
+li.menubar {
+  	background-color:#A981FE;
+	font-size: 12px;  
+	list-style: none outside;
+	border-bottom:1px solid #A87EFE;
+}
+
+.menu, .submenu {
+	display: none;
+	padding: 0px;
+}
+
+.menu li, .submenu li  {
+	padding:0px;
+	margin:0px;
+	border-bottom:1px solid #A981FE;
+}
+
+li.menubar a.standalone {
+	margin:0px;	
+	color:#FFFFFF; 
+	font-weight: bold;
+	font-size: 12px;
+	list-style: none; 
+	text-align:left; 
+ 	display: block;
+	padding: 5px;
+	border-left: 10px solid #3602A4;
+	border-bottom: 1px solid #3602A4;
+	background-color: #A981FE;
+	text-decoration: none;
+	margin:0px;
+}
+
+.menuList .menubar a.actuator {
+	list-style: none; 
+	margin:0px -10px 0px 0px;
+	display: block;
+	padding: 5px;
+	color:#FFFFFF; 
+	font-weight: bold;
+	font-size: 12px;
+	text-decoration: none;
+	list-style-position: outside; 
+	text-align:left;
+	border-left: 10px solid #3602A4;
+	border-right: 10px solid #E1D2FF;
+	border-bottom: 1px solid #3602A4;
+	background-color: #A981FE;
+}
+	
+
+.menuList .menubar a.actuator:hover, li.menubar a.standalone:hover{
+	border-left: 10px solid #A981FE;
+}
+
+.menuList ul,.menubar ul{
+	font-size: 10px; 	
+	background-color: #A981FE;
+	text-decoration: none;
+	list-style: none; 
+	color:#CC91D7 !important;
+	padding:10px 25px 10px 10px;
+}
+
+.menuList .menubar .menu li a{	
+	margin-bottom:0px;
+	display: block;
+	padding:5px;
+	border-left: 10px solid #C0A3FE;
+	border-bottom: 1px solid #C0A3FE;
+	background-color: #E1D2FF;
+	color: #000000;
+	text-decoration: none;
+}
+
+.menuList .menubar .menu li a:hover{	
+	border-left: 10px solid #F8F4FF;
+}
+
+.menuList a:link,a:visited{
+	text-decoration: none;
+}
+
+.menuList a:hover,a:active{
+	text-decoration: none;
+}
+
+/**<==end of menuExpandable menu define ==>**/
